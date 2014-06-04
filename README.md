@@ -72,7 +72,7 @@ These are the starting templates which go through increasing levels of complexit
 
 ### 1.Base
 
-This is a base image with only Java pre-installed. It's a good "getting started" template to try installing Cassandra and DataStax packages. See the [readme](./1.Base/README.md) for more details.
+This is a base image with only Java pre-installed. It's a good "getting started" template to try installing Cassandra and DataStax packages. See the [readme](./1.Base/) for more details.
 
 ### 2.MultiNode
 

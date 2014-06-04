@@ -4,4 +4,4 @@
 
 TBD
 
-test relative links: [home](../README.md)
+test relative links: [home](../)
