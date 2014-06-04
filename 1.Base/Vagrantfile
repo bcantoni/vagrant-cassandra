@@ -1,0 +1,65 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrant Cassandra Project
+# https://github.com/bcantoni/vagrant-cassandra
+# Brian Cantoni
+
+# This sample sets up 1 VMs (node0) with only Java installed.
+# See the README for a walkthrough explaining Cassandra and DataStax installation.
+
+# Adjustable settings
+CFG_MEMSIZE = "3000"    # max memory for each VM
+CFG_TZ = "US/Pacific"   # timezone, like US/Pacific, US/Eastern, UTC, Europe/Warsaw, etc.
+
+
+node_script = <<SCRIPT
+#!/bin/bash
+cat > /etc/hosts <<EOF
+127.0.0.1       localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+10.211.55.100   node0
+10.211.55.101   node1
+10.211.55.102   node2
+10.211.55.103   node3
+10.211.55.104   node4
+EOF
+
+# set timezone
+echo "#{CFG_TZ}" > /etc/timezone    
+dpkg-reconfigure -f noninteractive tzdata
+
+# install a few base packages
+apt-get update
+apt-get install vim curl python-pip -y
+
+# install java
+apt-get install openjdk-7-jre -y
+SCRIPT
+
+
+# VM configurations
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.define :node0 do |node0|
+    node0.vm.box = "hashicorp/precise64"
+    node0.vm.provider "vmware_fusion" do |v|
+      v.vmx["memsize"]  = CFG_MEMSIZE
+    end
+    node0.vm.provider :virtualbox do |v|
+      v.name = "node0"
+      v.customize ["modifyvm", :id, "--memory", CFG_MEMSIZE]
+    end
+    node0.vm.network :private_network, ip: "10.211.55.100"
+    node0.vm.hostname = "node0"
+    node0.vm.provision :shell, :inline => node_script
+  end
+end
