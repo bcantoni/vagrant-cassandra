@@ -25,6 +25,7 @@ In this project I may use Cassandra and DataStax interchangeably. Here's the dis
 
 1. Edit your local Hosts file to include the private network addresses (this makes it much easier to refer to the VMs by hostname):
 
+        10.211.54.100   base
         10.211.55.100   node0
         10.211.55.101   node1
         10.211.55.102   node2
@@ -55,7 +56,7 @@ Note: These scripts were created on a Mac OS X 10.9.3 host with Vagrant v1.6.0 a
 
 ## Using Vagrant
 
-The [Vagrant documentation](https://docs.vagrantup.com/v2/) is very good and I recommend at least going through the Getting Started section.
+The [Vagrant documentation](https://docs.vagrantup.com/v2/) is very good and I recommend going through the Getting Started section.
 
 These are the most common commands you'll need with this project:
 
