@@ -5,7 +5,7 @@
 # https://github.com/bcantoni/vagrant-cassandra
 # Brian Cantoni
 
-# This sample sets up 1 VMs (node0) with only Java installed.
+# This sample sets up 1 VM ('base') with only Java installed.
 # See the README for a walkthrough explaining Cassandra and DataStax installation.
 
 # Adjustable settings
@@ -33,17 +33,17 @@ SCRIPT
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.define :node0 do |node0|
-    node0.vm.box = "hashicorp/precise64"
-    node0.vm.provider "vmware_fusion" do |v|
+  config.vm.define :base do |base|
+    base.vm.box = "hashicorp/precise64"
+    base.vm.provider "vmware_fusion" do |v|
       v.vmx["memsize"]  = CFG_MEMSIZE
     end
-    node0.vm.provider :virtualbox do |v|
+    base.vm.provider :virtualbox do |v|
       v.name = "base"
       v.customize ["modifyvm", :id, "--memory", CFG_MEMSIZE]
     end
-    node0.vm.network :private_network, ip: CFG_IP
-    node0.vm.hostname = "base"
-    node0.vm.provision :shell, :inline => node_script
+    base.vm.network :private_network, ip: CFG_IP
+    base.vm.hostname = "base"
+    base.vm.provision :shell, :inline => node_script
   end
 end
