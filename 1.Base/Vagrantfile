@@ -5,13 +5,13 @@
 # https://github.com/bcantoni/vagrant-cassandra
 # Brian Cantoni
 
-# This sample sets up 1 VM ('base') with only Java installed.
+# This sample sets up 1 VM ('cassandra') with only Java installed.
 # See the README for a walkthrough explaining Cassandra and DataStax installation.
 
 # Adjustable settings
 CFG_MEMSIZE = "3000"      # max memory for each VM
 CFG_TZ = "US/Pacific"     # timezone, like US/Pacific, US/Eastern, UTC, Europe/Warsaw, etc.
-CFG_IP = "10.211.54.100"  # private IP address
+CFG_IP = "10.211.54.1"    # private IP address
 
 node_script = <<SCRIPT
 #!/bin/bash
@@ -33,17 +33,17 @@ SCRIPT
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.define :base do |base|
-    base.vm.box = "hashicorp/precise64"
-    base.vm.provider "vmware_fusion" do |v|
+  config.vm.define :cassandra do |x|
+    x.vm.box = "hashicorp/precise64"
+    x.vm.provider "vmware_fusion" do |v|
       v.vmx["memsize"]  = CFG_MEMSIZE
     end
-    base.vm.provider :virtualbox do |v|
-      v.name = "base"
+    x.vm.provider :virtualbox do |v|
+      v.name = "cassandra"
       v.customize ["modifyvm", :id, "--memory", CFG_MEMSIZE]
     end
-    base.vm.network :private_network, ip: CFG_IP
-    base.vm.hostname = "base"
-    base.vm.provision :shell, :inline => node_script
+    x.vm.network :private_network, ip: CFG_IP
+    x.vm.hostname = "cassandra"
+    x.vm.provision :shell, :inline => node_script
   end
 end
