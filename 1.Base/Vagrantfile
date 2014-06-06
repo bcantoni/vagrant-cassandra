@@ -11,7 +11,7 @@
 # Adjustable settings
 CFG_MEMSIZE = "3000"      # max memory for each VM
 CFG_TZ = "US/Pacific"     # timezone, like US/Pacific, US/Eastern, UTC, Europe/Warsaw, etc.
-CFG_IP = "10.211.54.100"  # private IP address
+CFG_IP = "10.211.54.1"    # private IP address
 
 node_script = <<SCRIPT
 #!/bin/bash

@@ -29,7 +29,6 @@ ff02::2 ip6-allrouters
 10.211.55.101   node1
 10.211.55.102   node2
 10.211.55.103   node3
-10.211.55.104   node4
 EOF
 
 # set timezone

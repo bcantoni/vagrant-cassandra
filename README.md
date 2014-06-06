@@ -25,12 +25,18 @@ In this project I may use Cassandra and DataStax interchangeably. Here's the dis
 
 1. Edit your local Hosts file to include the private network addresses (this makes it much easier to refer to the VMs by hostname):
 
-        10.211.54.100   base
+        10.211.54.1     cassandra
         10.211.55.100   node0
         10.211.55.101   node1
         10.211.55.102   node2
         10.211.55.103   node3
-        10.211.55.104   node4
+        10.211.55.110   node10
+        10.211.55.111   node11
+        10.211.55.112   node12
+        10.211.55.113   node13
+        10.211.55.114   node14
+        10.211.55.115   node15
+        10.211.55.116   node16
 
 1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) on your host
 1. Install [Vagrant](https://www.vagrantup.com/downloads)
