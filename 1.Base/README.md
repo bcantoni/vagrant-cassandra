@@ -22,7 +22,7 @@ OpenJDK Runtime Environment (IcedTea 2.4.7) (7u55-2.4.7-1ubuntu1~0.12.04.2)
 OpenJDK 64-Bit Server VM (build 24.51-b03, mixed mode)
 ```
 
-### Cassandra Tarball
+### Cassandra (Tarball)
 
 First let's try installing Cassandra from the Tarball. These steps are patterned after the Cassandra [Getting Started][gs] page.
 
@@ -51,9 +51,47 @@ First let's try installing Cassandra from the Tarball. These steps are patterned
 
 To exercise and play further with Cassandra, go through the [Getting Started][gs] walk-through.
 
+To clean up from this step, stop Cassandra and remove the data directories:
+
+        $ pkill -f CassandraDaemon
+        $ sudo rm -rf /var/lib/cassandra
+        $ sudm rm -rf /var/log/cassandra
+
+### DataStax Community Edition (Ubuntu Package)
+
+Next we'll try installing the [DataStax Community Edition][dsc] using the Ubuntu packages.
+
+1. The first step is to add the DataStax repo to the sources list for APT:
+
+        $ echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+        $ curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
+        $ sudo apt-get update
+
+1. Next, install the DataStax build:
+
+        $ sudo apt-get install dsc20
+
+1. When the installation is complete, Cassandra should be installed and running as a service.
+
+        $ sudo service cassandra status
+         * Cassandra is running
+        $ nodetool status
+        Datacenter: datacenter1
+        =======================
+        Status=Up/Down
+        |/ State=Normal/Leaving/Joining/Moving
+        --  Address    Load       Tokens  Owns (effective)  Host ID                               Rack
+        UN  127.0.0.1  40.94 KB   256     100.0%            e3c5a74b-b29c-4084-9621-50c169c75cb7  rack1
+        vagrant@base:~$ cqlsh
+        Connected to Test Cluster at localhost:9160.
+        [cqlsh 4.1.1 | Cassandra 2.0.8 | CQL spec 3.1.1 | Thrift protocol 19.39.0]
+        Use HELP for help.
+        cqlsh>
+
+
 [gs]: http://wiki.apache.org/cassandra/GettingStarted
 [dl]: http://cassandra.apache.org/download/
-
+[dsc]: http://www.datastax.com/documentation/cassandra/2.0/cassandra/install/installDeb_t.html
 
 
 name: base

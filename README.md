@@ -32,7 +32,7 @@ In this project I may use Cassandra and DataStax interchangeably. Here's the dis
         10.211.55.103   node3
         10.211.55.104   node4
 
-1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) on your host
+1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 1. Install [Vagrant](https://www.vagrantup.com/downloads)
 1. Check that both are installed and reachable from a command line:
 
@@ -69,17 +69,17 @@ These are the most common commands you'll need with this project:
 
 ## Templates
 
-These are the starting templates which go through increasing levels of complexity for a Cassandra installation. Each of these is located in its own subdirectory with its own `Vagrantfile` (definition file used by Vagrant) and any supporting config files. See the README file with each template for more details on that configuration.
+These are the starting templates which go through increasing levels of complexity for a Cassandra installation. Each of these is located in its own subdirectory with its own `Vagrantfile` (definition file used by Vagrant) and a README with instructions and more details.
 
-### 1.Base
+### 1. Base
 
 This is a base image with only Java pre-installed. It's a good "getting started" template to try installing Cassandra and DataStax packages.
 
-### 2.MultiNode
+### 2. MultiNode
 
 This template creates 4 VMs: one for OpsCenter and 3 for Cassandra notes. OpsCenter is preinstalled, and you can use that to finish building the cluster.
 
-### 3.MultiDC
+### 3. MultiDC
 
 This template builds and configures a multi-datacenter cluster (one OpsCenter VM and 6 Cassandra nodes in 2 datacenters).
 
