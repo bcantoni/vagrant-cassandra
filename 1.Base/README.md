@@ -110,6 +110,7 @@ Next we'll try installing the [DataStax Community Edition][dsc] using the Ubuntu
         Use HELP for help.
         cqlsh>
 
+Now you can play with Cassandra as we did before, using the CQLSH tool. The difference here is the install method (Ubuntu package versus tarball), and the result is Cassandra running as a service automatically.
 
 [gs]: http://wiki.apache.org/cassandra/GettingStarted
 [dl]: http://cassandra.apache.org/download/

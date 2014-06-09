@@ -76,15 +76,15 @@ These are the most common commands you'll need with this project:
 
 ## Templates
 
-These are the starting templates which go through increasing levels of complexity for a Cassandra installation. Each of these is located in its own subdirectory with its own `Vagrantfile` (definition file used by Vagrant) and a README with instructions and more details.
+These are the starting templates which go through increasing levels of complexity for a Cassandra installation. Each of these is located in its own subdirectory with its own `Vagrantfile` (the definition file used by Vagrant) and a README with instructions and more details.
 
 ### 1. Base
 
-This is a base image with only Java pre-installed. It's a good "getting started" template to try installing Cassandra and DataStax packages.
+This is a base template with only Java pre-installed. It's a good getting started point to explore installing Cassandra and DataStax packages.
 
 ### 2. MultiNode
 
-This template creates 4 VMs: one for OpsCenter and 3 for Cassandra notes. OpsCenter is preinstalled, and you can use that to finish building the cluster.
+This template creates 4 VMs: one for OpsCenter and 3 for Cassandra nodes. OpsCenter is preinstalled, and you can use that to finish building the cluster.
 
 ### 3. MultiDC
 
