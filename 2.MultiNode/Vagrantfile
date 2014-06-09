@@ -11,8 +11,47 @@
 # Adjustable settings
 CFG_MEMSIZE = "3000"    # max memory for each VM
 CFG_TZ = "US/Pacific"   # timezone, like US/Pacific, US/Eastern, UTC, Europe/Warsaw, etc.
+SERVER_COUNT = 4
+NETWORK = '10.211.55.'
+FIRST_IP = 100
 
+# Provisioning skip for Opscenter node (node0)
+opsc_script = <<SCRIPT
+#!/bin/bash
+cat > /etc/hosts <<EOF
+127.0.0.1       localhost
 
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+10.211.55.100   node0
+10.211.55.101   node1
+10.211.55.102   node2
+10.211.55.103   node3
+EOF
+
+# set timezone
+echo "#{CFG_TZ}" > /etc/timezone    
+dpkg-reconfigure -f noninteractive tzdata
+
+# install a few base packages
+apt-get install vim curl python-pip -y
+
+# install OpsCenter
+echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/datastax.community.list
+curl --silent -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
+apt-get update
+apt-get install opscenter -y
+service opscenterd start
+
+echo "Vagrant provisioning complete"
+SCRIPT
+
+# Provisioning skip for Cassandra nodes (node1-3)
 node_script = <<SCRIPT
 #!/bin/bash
 cat > /etc/hosts <<EOF
@@ -41,24 +80,45 @@ apt-get install vim curl python-pip -y
 
 # install java
 apt-get install openjdk-7-jre -y
+
+echo "Vagrant provisioning complete"
 SCRIPT
 
 
-# VM configurations
+# Configure VM servers
+servers = []
+(0..SERVER_COUNT-1).each do |i|
+  name = 'node' + i.to_s
+  ip = NETWORK + (FIRST_IP + i).to_s
+  servers << {'name' => name, 'ip' => ip}
+end
+
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.define :node0 do |node0|
-    node0.vm.box = "hashicorp/precise64"
-    node0.vm.provider "vmware_fusion" do |v|
-      v.vmx["memsize"]  = CFG_MEMSIZE
+  config.vm.box = "hashicorp/precise64"
+  servers.each do |server|
+    config.vm.define server['name'] do |config2|
+      config2.vm.hostname = server['name']
+      config2.vm.network :private_network, ip: server['ip']
+
+      if (server['name'] == 'node0')
+        config2.vm.provision :shell, :inline => opsc_script
+      else
+        config2.vm.provision :shell, :inline => node_script
+      end
+
+      config2.vm.provider "vmware_fusion" do |v|
+        v.vmx["memsize"]  = CFG_MEMSIZE
+      end
+      config2.vm.provider :virtualbox do |v|
+        v.name = server['name']
+        v.customize ["modifyvm", :id, "--memory", CFG_MEMSIZE]
+      end
+
     end
-    node0.vm.provider :virtualbox do |v|
-      v.name = "nodex"
-      v.customize ["modifyvm", :id, "--memory", CFG_MEMSIZE]
-    end
-    node0.vm.network :private_network, ip: "10.211.55.100"
-    node0.vm.hostname = "nodex"
-    node0.vm.provision :shell, :inline => node_script
   end
 end
+
+
+
