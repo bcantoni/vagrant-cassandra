@@ -12,7 +12,9 @@ If everything has been installed correctly, you can bring up the Vagrant VM with
 $ vagrant up
 ```
 
-The process will take several minutes to create the VM and load the initial packages. When the up command is done, login to the VM and confirm that Java is installed:
+The process will take several minutes to create the VM and load the initial packages. For the very first run, the download will take a while as the whole Ubuntu image is downloaded to your system. Future "ups" will be much faster.
+
+When the up command is done, login to the VM and confirm that Java is installed:
 
 ```
 $ vagrant ssh
@@ -112,24 +114,3 @@ Next we'll try installing the [DataStax Community Edition][dsc] using the Ubuntu
 [gs]: http://wiki.apache.org/cassandra/GettingStarted
 [dl]: http://cassandra.apache.org/download/
 [dsc]: http://www.datastax.com/documentation/cassandra/2.0/cassandra/install/installDeb_t.html
-
-
-name: base
-
-go thru:
-
-installs, point to docs
-cassandra tar
-
-dsc apt-get
-opscenter + agent
-
-simple walk-thru with
-- nodetool status
-- cqlsh
-  create keyspace
-  create table
-  insert data
-  select data
-
-point to walk-thru docs

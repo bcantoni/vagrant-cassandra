@@ -25,7 +25,8 @@ In this project I may use Cassandra and DataStax interchangeably. Here's the dis
 
 1. Edit your local Hosts file to include the private network addresses (this makes it much easier to refer to the VMs by hostname):
 
-        10.211.54.1     cassandra
+        # vagrant-cassandra private network hosts
+        10.211.54.10    cassandra
         10.211.55.100   node0
         10.211.55.101   node1
         10.211.55.102   node2
@@ -54,7 +55,7 @@ In this project I may use Cassandra and DataStax interchangeably. Here's the dis
 
 1. Try each of the templates listed below, for example:
 
-        cd step1
+        cd 1.Base
         vagrant up
         vagrant ssh
 
