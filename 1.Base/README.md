@@ -62,16 +62,19 @@ First let's try installing Cassandra from the Tarball. These steps are patterned
           user_id int,
           fname text,
           lname text,
+          email text,
           primary key (user_id)
         );
 
-        INSERT INTO users (user_id, fname, lname) VALUES (1000, 'john', 'smith');
-        INSERT INTO users (user_id, fname, lname) VALUES (1001, 'john', 'doe');
-        INSERT INTO users (user_id, fname, lname) VALUES (1002, 'john', 'smith');
+        INSERT INTO users (user_id, fname, lname, email) VALUES (1000, 'john', 'smith', 'smith_j@example.com');
+        INSERT INTO users (user_id, fname, lname, email) VALUES (1001, 'john', 'doe', 'john.doe@example.com');
+        INSERT INTO users (user_id, fname, lname, email) VALUES (1002, 'bob', 'johnson', 'bob@example.com');
 
         SELECT * FROM users;
 
-To exercise and play further with Cassandra, go through the [Getting Started][gs] walk-through.
+To exercise and play further with Cassandra, go through the [Getting Started][gs] walk-through. To load the table with more data, there is a sample data CSV file. To import it from the CQL shell, use the command:
+
+    COPY usertest.users (user_id, email, lname, fname) FROM '/vagrant/sample_users.csv' WITH HEADER = true;
 
 To clean up from this step, stop Cassandra and remove the data directories:
 
