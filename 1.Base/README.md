@@ -6,7 +6,7 @@ This is a base Vagrant template that starts with only Java pre-installed. Follow
 
 ### Setup
 
-If everything has been installed correctly, you can bring up the Vagrant VM with the following:
+If Vagrant and VirtualBox have been installed correctly, you can bring up the Vagrant VM with the following:
 
 ```
 $ vagrant up
@@ -78,9 +78,9 @@ To exercise and play further with Cassandra, go through the [Getting Started][gs
 
 To clean up from this step, stop Cassandra and remove the data directories:
 
-        $ pkill -f CassandraDaemon
-        $ sudo rm -rf /var/lib/cassandra
-        $ sudm rm -rf /var/log/cassandra
+    $ pkill -f CassandraDaemon
+    $ sudo rm -rf /var/lib/cassandra
+    $ sudm rm -rf /var/log/cassandra
 
 ### DataStax Community Edition (Ubuntu Package)
 
