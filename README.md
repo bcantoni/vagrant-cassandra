@@ -23,6 +23,8 @@ In this project I may use Cassandra and DataStax interchangeably. Here's the dis
 
 ## Installation
 
+Note: These scripts were created on a Mac OS X 10.9.3 host with Vagrant v1.6.0 and VirtualBox v4.3.12. Everything should work for Windows hosts as well, but I have not tested it yet.
+
 1. Edit your local Hosts file to include the private network addresses (this makes it much easier to refer to the VMs by hostname):
 
         # vagrant-cassandra private network hosts
@@ -58,8 +60,6 @@ In this project I may use Cassandra and DataStax interchangeably. Here's the dis
         cd 1.Base
         vagrant up
         vagrant ssh
-
-Note: These scripts were created on a Mac OS X 10.9.3 host with Vagrant v1.6.0 and VirtualBox v4.3.12. Everything should work for Windows hosts as well, but I have not tested it yet.
 
 ## Using Vagrant
 
