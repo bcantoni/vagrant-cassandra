@@ -17,7 +17,7 @@ If Vagrant has been installed correctly, you can bring up the 4 VMs with the fol
 $ vagrant up
 ```
 
-Note: This will bring up each VM in series which could take a while. You can also try running the included `parallel.sh` script which creates the VMs in series, but then does the provisioning step in parallel.
+Note: This will bring up each VM in series which could take a while. You can also try running the included `up-parallel.sh` script which creates the VMs in series, but then does the provisioning step in parallel.
 
 When the up command is done, you can check the status of the 4 VMs:
 
