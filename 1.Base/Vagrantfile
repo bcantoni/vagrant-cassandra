@@ -20,6 +20,10 @@ node_script = <<SCRIPT
 echo "#{CFG_TZ}" > /etc/timezone    
 dpkg-reconfigure -f noninteractive tzdata
 
+# install and configure for local debian proxy (if present)
+apt-get install squid-deb-proxy-client -y
+echo 'Acquire::http::Proxy "http://10.211.54.100:8000/";' | sudo tee /etc/apt/apt.conf.d/30autoproxy
+
 # install a few base packages
 apt-get update
 apt-get install vim curl python-pip -y

@@ -5,7 +5,10 @@ This Vagrant template sets up 4 separate VMs for creating a Cassandra cluster:
 * node0 - [OpsCenter](http://www.datastax.com/what-we-offer/products-services/datastax-opscenter) host
 * node[1-3] - base system (only Java pre-installed)
 
-Note: Depending on how much memory your host system has, you may need to lower the default memory size for each VM. Currently it's set to 3GB for each VM, but with all 4 running it may be too much for your host.
+Notes:
+
+* Depending on how much memory your host system has, you may need to lower the default memory size for each VM. Currently it's set to 3GB for each VM, but with all 4 running it may be too much for your host.
+* Running a local Debian package proxy cache ([bcantoni/vagrant-deb-proxy](https://github.com/bcantoni/vagrant-deb-proxy)) will make the provisioning step much faster.
 
 ## Instructions
 
@@ -14,10 +17,10 @@ Note: Depending on how much memory your host system has, you may need to lower t
 If Vagrant has been installed correctly, you can bring up the 4 VMs with the following:
 
 ```
-$ vagrant up
+$ ./up-parallel.sh
 ```
 
-Note: This will bring up each VM in series which could take a while. You can also try running the included `up-parallel.sh` script which creates the VMs in series, but then does the provisioning step in parallel.
+Note: This will bring up each VM in series and then provision each in parallel. You can also just run `vagrant up` which does everything in series and will be slower.
 
 When the up command is done, you can check the status of the 4 VMs:
 
@@ -88,6 +91,12 @@ To cleanly shut down all 4 VMs:
 $ for i in {0..3}; do vagrant ssh node$i -c 'sudo shutdown -h now'; done
 ```
 
+To destroy all 4 VMs:
+
+```
+vagrant destroy /node[0-3]/ -f
+```
+
 ---
 
 Notes
@@ -146,7 +155,3 @@ cassandra-stress -d node3 -n 200000 -o read
 
 run without the -n to do 1M by default
 
-vagrant destroy /node[0-3]/ -f
-
-clean shutting down
-for i in {0..3}; do vagrant ssh node$i -c 'sudo shutdown -h now'; done

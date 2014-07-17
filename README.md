@@ -12,6 +12,8 @@ Here are a few related projects I learned from while assembling my Vagrant setup
 * [dholbrook/vagrant-cassandra](https://github.com/dholbrook/vagrant-cassandra) - another Chef
 * [oeelvik/vagrant-puppet-hadoop-datastax](https://github.com/oeelvik/vagrant-puppet-hadoop-datastax) - using Puppet for provisioning
 
+You may also find [bcantoni/vagrant-deb-proxy](https://github.com/bcantoni/vagrant-deb-proxy) helpful for speeding up Ubuntu package installs.
+
 ## Cassandra vs DataStax
 
 In this project I may use Cassandra and DataStax interchangeably. Here's the distinction:
@@ -23,7 +25,7 @@ In this project I may use Cassandra and DataStax interchangeably. Here's the dis
 
 ## Installation
 
-Note: These scripts were created on a Mac OS X 10.9.3 host with Vagrant v1.6.0 and VirtualBox v4.3.12. Everything should work for Windows hosts as well, but I have not tested it yet.
+Note: These scripts were created on a Mac OS X 10.9.4 host with Vagrant v1.6.0 and VirtualBox v4.3.12. Everything should work for Windows hosts as well, but I have not tested it yet.
 
 1. Edit your local Hosts file to include the private network addresses (this makes it much easier to refer to the VMs by hostname):
 
