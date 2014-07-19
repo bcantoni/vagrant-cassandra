@@ -49,11 +49,11 @@ Linux node3 3.2.0-23-generic #36-Ubuntu SMP Tue Apr 10 20:39:51 UTC 2012 x86_64 
 First, let's confirm that OpsCenter is running:
 
 ```
- vagrant ssh node0 -c "sudo service opscenterd status"
+$ vagrant ssh node0 -c "sudo service opscenterd status"
  * Cassandra cluster manager opscenterd is running
 ```
 
-Next, connect to the OpsCenter web interface: http://node0:8888/ which should start like the following:
+Next, connect to the OpsCenter web interface: <http://node0:8888/> which should start like the following:
 
 ![OpsCenter Start Screenshot](images/OpsCenterStart.png)
 
@@ -76,6 +76,20 @@ Once all packages are installed and configured, the agents will start up up. Onc
 
 ![Build Complete Screenshot](images/BuildComplete.png)
 
+To put some load on the Cassandra cluster (and see the reaction in OpsCenter), try running the Cassandra Stress tool:
+
+```
+$ vagrant ssh node1
+$ cassandra-stress -d node1 -n 200000
+Created keyspaces. Sleeping 1s for propagation.
+total,interval_op_rate,interval_key_rate,latency,95th,99.9th,elapsed_time
+22479,2247,2247,20.2,50.6,329.4,10
+64491,4201,4201,14.2,37.1,87.1,20
+116785,5229,5229,11.9,30.2,87.1,30
+174151,5736,5736,10.8,25.3,86.6,40
+200000,2584,2584,10.7,23.8,57.4,45
+```
+
 From here, you can learn more about OpsCenter:
 
 * [OpsCenter Tutorial](http://www.datastax.com/resources/tutorials/overview-opscenter) (video)
@@ -96,62 +110,3 @@ To destroy all 4 VMs:
 ```
 vagrant destroy /node[0-3]/ -f
 ```
-
----
-
-Notes
-
-mention adjust total memory based on size of host machine
-
-
-after install, node0 has opscenter, node1-3 have just java
-
-connect with Opscenter running on node0
-browse to: http://node0:8888/
-
-click Create Brand New Cluster
-
-DSE:
-Name: you pick
-Package: DataStax Enterprise 4.0.3
-
-DataStax credentials: from reg email
-
-Nodes:
-node1
-node2
-node3
-Solr nodes: 0
-Hadoop Nodes: 1
-Node credentials:
-user: vagrant
-password: vagrant
-No private key needed
-mention advanced options
-click Build Cluster
-click Accept Fingerprints
-watch Build in Progress page
-
-Community
-Name:
-Package: DataStax Community 2.0.7
-resume above
-
-
-vagrant ssh node1
-
-like 1.base but cqlsh node1, then create keyspace rf=3
-
-CREATE KEYSPACE usertest WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 2 };
-like 1.base, write several values
-turn off one node - reads still work
-turn off 2 nodes - should fail
-
-
-play with cassandra-stress
-
-cassandra-stress -d node1 -n 200000
-cassandra-stress -d node3 -n 200000 -o read
-
-run without the -n to do 1M by default
-
