@@ -72,9 +72,21 @@ First let's try installing Cassandra from the Tarball. These steps are patterned
 
         SELECT * FROM users;
 
-To exercise and play further with Cassandra, go through the [Getting Started][gs] walk-through. To load the table with more data, there is a sample data CSV file. To import it from the CQL shell, use the command:
+To exercise and play further with Cassandra, go through the [Getting Started][gs] walk-through. To load the table with more data, there is a sample data CSV file which can be imported using the CQL shell:
 
-    COPY usertest.users (user_id, email, lname, fname) FROM '/vagrant/sample_users.csv' WITH HEADER = true;
+    $ cqlsh
+    Connected to Test Cluster at localhost:9160.
+    [cqlsh 4.1.1 | Cassandra 2.0.8.39 | CQL spec 3.1.1 | Thrift protocol 19.39.0]
+    Use HELP for help.
+    cqlsh> COPY usertest.users (user_id, email, lname, fname) FROM '/vagrant/sample_users.csv' WITH HEADER = true;
+    100 rows imported in 0.173 seconds.
+    cqlsh> select count(*) from usertest.users;
+
+     count
+    -------
+       103
+
+    (1 rows)
 
 To clean up from this step, stop Cassandra and remove the data directories:
 
