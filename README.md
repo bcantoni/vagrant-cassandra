@@ -54,14 +54,14 @@ Note: These scripts were created on a Mac OS X 10.9.4 host with Vagrant v1.6.0 a
 
 1. Clone this repository
 
-        git clone https://github.com/bcantoni/vagrant-cassandra.git
-        cd vagrant-cassandra
+        $ git clone https://github.com/bcantoni/vagrant-cassandra.git
+        $ cd vagrant-cassandra
 
 1. Try each of the templates listed below, for example:
 
-        cd 1.Base
-        vagrant up
-        vagrant ssh
+        $ cd 1.Base
+        $ vagrant up
+        $ vagrant ssh
 
 ## Using Vagrant
 
