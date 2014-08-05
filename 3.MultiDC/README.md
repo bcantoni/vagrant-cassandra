@@ -75,17 +75,13 @@ Next, connect to the OpsCenter web interface: <http://node10:8888/> which should
 
 ![OpsCenter Start Screenshot](../2.MultiMode/images/OpsCenterStart.png)
 
-Now we can use OpsCenter to connect with the existing cluster on node[1-6]. Click on Manage Existing Cluster and fill in the appropriate fields:
-
-* Nodes: node11
-
-Click View Advanced Options to get a view of customizations you can control.
-
-Click Build Cluster, then Accept Fingerprints.
+Now we can use OpsCenter to connect with the existing cluster on node[1-6]. Click on Manage Existing Cluster, type in `node11`, then click Save Cluster. (OpsCenter just needs to connect with one node in a cluster, then it will discover the rest.)
 
 Once OpsCenter has discovered all of the cluster hosts, it should show the 6-node cluster in two datacenters (DC1, DC2):
 
 ![Build Complete Screenshot](images/OpsCenterView.png)
+
+Click around in the OpsCenter UI to see the different views and options.
 
 To put some load on the Cassandra cluster (and see the reaction in OpsCenter), try running the Cassandra Stress tool:
 
