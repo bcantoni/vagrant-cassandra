@@ -100,9 +100,12 @@ total,interval_op_rate,interval_key_rate,latency,95th,99.9th,elapsed_time
 From here, you can learn more about OpsCenter:
 
 * [OpsCenter Tutorial](http://www.datastax.com/resources/tutorials/overview-opscenter) (video)
-* [OpsCenter 4.1 Documentation](http://www.datastax.com/documentation/opscenter/4.1/opsc/about_c.html)
+* [OpsCenter Documentation](http://www.datastax.com/documentation/opscenter/5.0/opsc/about_c.html)
 * [Using OpsCenter](http://www.datastax.com/documentation/opscenter/4.1/opsc/online_help/opscUsing_g.html)
 
+To learn more about the configuration performed in this template, see:
+
+* [Initializing a multiple node cluster (multiple data centers)](http://www.datastax.com/documentation/cassandra/2.0/cassandra/initialize/initializeMultipleDS.html)
 
 ### Shut Down
 
