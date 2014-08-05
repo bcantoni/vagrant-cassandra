@@ -73,7 +73,7 @@ $ vagrant ssh node10 -c "sudo service opscenterd status"
 
 Next, connect to the OpsCenter web interface: <http://node10:8888/> which should start like the following:
 
-![OpsCenter Start Screenshot](../2.MultiMode/images/OpsCenterStart.png)
+![OpsCenter Start Screenshot](../2.MultiNode/images/OpsCenterStart.png)
 
 Now we can use OpsCenter to connect with the existing cluster on node[1-6]. Click on Manage Existing Cluster, type in `node11`, then click Save Cluster. (OpsCenter just needs to connect with one node in a cluster, then it will discover the rest.)
 
