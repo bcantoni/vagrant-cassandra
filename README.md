@@ -16,7 +16,7 @@ You may also find [bcantoni/vagrant-deb-proxy](https://github.com/bcantoni/vagra
 
 ## Cassandra vs DataStax
 
-In this project I may use Cassandra and DataStax interchangeably. Here's the distinction:
+In this project I tend to use the terms "Cassandra" and "DataStax" interchangeably. Here's the distinction:
 
 * [Cassandra](http://cassandra.apache.org/) is the Apache open source database project. Their releases include binary .tar and packages for Debian
 * [DataStax](http://datastax.com/) provides the Cassandra database combined with other tools in two flavors:
@@ -25,7 +25,7 @@ In this project I may use Cassandra and DataStax interchangeably. Here's the dis
 
 ## Installation
 
-Note: These scripts were created on a Mac OS X 10.9.4 host with Vagrant v1.6.0 and VirtualBox v4.3.12. Everything should work for Windows hosts as well, but I have not tested it yet.
+Note: These scripts were created on a Mac OS X 10.9.4 host with Vagrant v1.6.3 and VirtualBox v4.3.12. Everything should work for Windows hosts as well, but I have not tested it yet.
 
 1. Edit your local Hosts file to include the private network addresses (this makes it much easier to refer to the VMs by hostname):
 
@@ -43,6 +43,7 @@ Note: These scripts were created on a Mac OS X 10.9.4 host with Vagrant v1.6.0 a
         10.211.55.115   node15
         10.211.55.116   node16
 
+   Alternatively, try the [vagrant-hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater) plugin which should do the same thing automatically.
 1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 1. Install [Vagrant](https://www.vagrantup.com/downloads)
 1. Check that both are installed and reachable from a command line:
