@@ -1,0 +1,165 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrant Cassandra Project
+# https://github.com/bcantoni/vagrant-cassandra
+# Brian Cantoni
+
+# This template sets up 7 VMs:
+#   node10: OpsCenter installed
+#   node11-16: only Java installed
+# See the README for a walkthrough explaining Cassandra and DataStax installation.
+
+# Adjustable settings
+CFG_MEMSIZE = "1500"    # max memory for each VM
+CFG_TZ = "US/Pacific"   # timezone, like US/Pacific, US/Eastern, UTC, Europe/Warsaw, etc.
+SERVER_COUNT = 7
+NETWORK = '10.211.55.'
+FIRST_IP = 110
+
+# Provisioning script for Opscenter node (node10)
+opsc_script = <<SCRIPT
+#!/bin/bash
+cat > /etc/hosts <<EOF
+127.0.0.1       localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+10.211.55.110   node10
+10.211.55.111   node11
+10.211.55.112   node12
+10.211.55.113   node13
+10.211.55.114   node14
+10.211.55.115   node15
+10.211.55.116   node16
+EOF
+
+# set timezone
+echo "#{CFG_TZ}" > /etc/timezone    
+dpkg-reconfigure -f noninteractive tzdata
+
+# install and configure for local debian proxy (if present)
+apt-get install squid-deb-proxy-client -y
+echo 'Acquire::http::Proxy "http://10.211.54.100:8000/";' | sudo tee /etc/apt/apt.conf.d/30autoproxy
+
+# install a few base packages
+apt-get update
+apt-get install vim curl python-pip -y
+
+# remove proxy ahead of installing Opscenter
+rm /etc/apt/apt.conf.d/30autoproxy
+
+# install OpsCenter
+echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/datastax.community.list
+curl --silent -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
+apt-get update
+apt-get install opscenter -y
+service opscenterd start
+
+echo "Vagrant provisioning complete"
+SCRIPT
+
+# Provisioning script for Cassandra nodes (node11-16)
+node_script = <<SCRIPT
+#!/bin/bash
+cat > /etc/hosts <<EOF
+127.0.0.1       localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+10.211.55.110   node10
+10.211.55.111   node11
+10.211.55.112   node12
+10.211.55.113   node13
+10.211.55.114   node14
+10.211.55.115   node15
+10.211.55.116   node16
+EOF
+
+# set timezone
+echo "#{CFG_TZ}" > /etc/timezone    
+dpkg-reconfigure -f noninteractive tzdata
+
+# install and configure for local debian proxy (if present)
+apt-get install squid-deb-proxy-client -y
+echo 'Acquire::http::Proxy "http://10.211.54.100:8000/";' | sudo tee /etc/apt/apt.conf.d/30autoproxy
+
+# install a few base packages
+apt-get update
+apt-get install vim curl python-pip python-support -y
+
+# install java
+apt-get install openjdk-7-jre libjna-java -y
+
+# remove proxy ahead of installing Cassandra
+rm /etc/apt/apt.conf.d/30autoproxy
+
+# configure DataStax repo
+echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+curl --silent -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
+
+# install DataStax community
+apt-get update
+apt-get install dsc20 datastax-agent -y
+
+# stop service if running
+echo "Stopping Cassandra..."
+service cassandra stop
+rm -rf /var/lib/cassandra/data/system/*
+
+# copy datacenter config files and restart service
+cp /vagrant/cassandra.yaml /etc/cassandra
+cp /vagrant/cassandra-topology.properties /etc/cassandra
+echo "stomp_interface: 10.211.55.110" | sudo tee -a /var/lib/datastax-agent/conf/address.yaml
+echo "Restarting Cassandra..."
+service cassandra start
+service datastax-agent restart
+
+echo "Vagrant provisioning complete"
+SCRIPT
+
+
+# Configure VM servers
+servers = []
+(0..SERVER_COUNT-1).each do |i|
+  name = 'node1' + i.to_s
+  ip = NETWORK + (FIRST_IP + i).to_s
+  servers << {'name' => name, 'ip' => ip}
+end
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "hashicorp/precise64"
+  servers.each do |server|
+    config.vm.define server['name'] do |config2|
+      config2.vm.hostname = server['name']
+      config2.vm.network :private_network, ip: server['ip']
+
+      if (server['name'] == 'node10')
+        config2.vm.provision :shell, :inline => opsc_script
+      else
+        config2.vm.provision :shell, :inline => node_script
+      end
+
+      config2.vm.provider "vmware_fusion" do |v|
+        v.vmx["memsize"]  = CFG_MEMSIZE
+      end
+      config2.vm.provider :virtualbox do |v|
+        v.name = server['name']
+        v.customize ["modifyvm", :id, "--memory", CFG_MEMSIZE]
+      end
+
+    end
+  end
+end
