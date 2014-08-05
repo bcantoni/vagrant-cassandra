@@ -3,7 +3,9 @@
 This Vagrant template sets up 7 separate VMs for creating a multi-datacenter Cassandra cluster:
 
 * node10 - [OpsCenter](http://www.datastax.com/what-we-offer/products-services/datastax-opscenter) host
-* node[11-16] - Cassandra nodes
+* node[11-16] - [Cassandra](http://planetcassandra.org/cassandra/) nodes
+
+The Vagrantfile in this example creates the VMs, installs OpsCenter and Cassandra, then configures the 6-node cluster into two different virtual datacenters (DC1 and DC2).
 
 Notes:
 
@@ -22,9 +24,7 @@ $ ./up-parallel.sh
 
 Note: This will bring up each VM in series and then provision each in parallel. You can also just run `vagrant up` which does everything in series and will be slower.
 
-The provisioning process for node[11-16] will install Cassandra (DataStax Community Edition) and configure it for 2 datacenters (DC1 and DC2).
-
-When the up command is done, you can check the status of the 7 VMs:
+When the provisioning process is done, you can check the status of the 7 VMs:
 
 ```
 $ vagrant status
@@ -39,7 +39,7 @@ node15                     running (virtualbox)
 node16                     running (virtualbox)
 ```
 
-Log in to one node and check the Cassandra cluster status:
+Log in to one node and check the Cassandra cluster status. You should see all 6 nodes up and running:
 
 ```
 $ vagrant ssh node11
