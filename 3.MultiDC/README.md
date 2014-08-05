@@ -112,7 +112,7 @@ To learn more about the configuration performed in this template, see:
 To cleanly shut down all 7 VMs:
 
 ```
-$ for i in {0..6}; do vagrant ssh node$i -c 'sudo shutdown -h now'; done
+$ for i in {0..6}; do vagrant ssh node1$i -c 'sudo shutdown -h now'; done
 ```
 
 To destroy all 7 VMs:
