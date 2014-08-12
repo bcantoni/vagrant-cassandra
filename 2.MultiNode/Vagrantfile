@@ -42,14 +42,11 @@ dpkg-reconfigure -f noninteractive tzdata
 
 # install and configure for local debian proxy (if present)
 apt-get install squid-deb-proxy-client -y
-echo 'Acquire::http::Proxy "http://10.211.54.100:8000/";' | sudo tee /etc/apt/apt.conf.d/30autoproxy
+cp /vagrant/apt-proxy /etc/apt/apt.conf.d/30autoproxy
 
 # install a few base packages
 apt-get update
 apt-get install vim curl zip unzip git python-pip -y
-
-# remove proxy ahead of installing Opscenter
-rm /etc/apt/apt.conf.d/30autoproxy
 
 # install OpsCenter
 echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/datastax.community.list
@@ -86,7 +83,7 @@ dpkg-reconfigure -f noninteractive tzdata
 
 # install and configure for local debian proxy (if present)
 apt-get install squid-deb-proxy-client -y
-echo 'Acquire::http::Proxy "http://10.211.54.100:8000/";' | sudo tee /etc/apt/apt.conf.d/30autoproxy
+cp /vagrant/apt-proxy /etc/apt/apt.conf.d/30autoproxy
 
 # install a few base packages
 apt-get update
@@ -94,9 +91,6 @@ apt-get install vim curl zip unzip git python-pip -y
 
 # install java
 apt-get install openjdk-7-jre -y
-
-# remove proxy ahead of installing Cassandra
-rm /etc/apt/apt.conf.d/30autoproxy
 
 echo "Vagrant provisioning complete"
 SCRIPT

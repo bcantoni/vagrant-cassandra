@@ -1,0 +1,6 @@
+Acquire::http::Proxy "http://10.211.54.100:8000/";
+
+Acquire::http::Proxy {
+    debian.datastax.com DIRECT;
+};
+

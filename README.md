@@ -46,6 +46,7 @@ Note: These scripts were created on a Mac OS X 10.9.4 host with Vagrant v1.6.3 a
    Alternatively, try the [vagrant-hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater) plugin which should do the same thing automatically.
 1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 1. Install [Vagrant](https://www.vagrantup.com/downloads)
+1. Install and start [bcantoni/vagrant-deb-proxy](https://github.com/bcantoni/vagrant-deb-proxy) to make the provisioning steps much faster
 1. Check that both are installed and reachable from a command line:
 
         $ vagrant --version
