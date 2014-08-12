@@ -108,5 +108,5 @@ $ for i in {0..3}; do vagrant ssh node$i -c 'sudo shutdown -h now'; done
 To destroy all 4 VMs:
 
 ```
-$ vagrant destroy /node[0-3]/ -f
+$ vagrant destroy -f
 ```
