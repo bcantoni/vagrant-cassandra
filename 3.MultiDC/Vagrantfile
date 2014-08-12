@@ -49,7 +49,7 @@ echo 'Acquire::http::Proxy "http://10.211.54.100:8000/";' | sudo tee /etc/apt/ap
 
 # install a few base packages
 apt-get update
-apt-get install vim curl python-pip -y
+apt-get install vim curl zip unzip git python-pip -y
 
 # remove proxy ahead of installing Opscenter
 rm /etc/apt/apt.conf.d/30autoproxy
@@ -96,7 +96,7 @@ echo 'Acquire::http::Proxy "http://10.211.54.100:8000/";' | sudo tee /etc/apt/ap
 
 # install a few base packages
 apt-get update
-apt-get install vim curl python-pip python-support -y
+apt-get install vim curl zip unzip git python-pip python-support -y
 
 # install java
 apt-get install openjdk-7-jre libjna-java -y
