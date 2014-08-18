@@ -13,6 +13,19 @@ CFG_MEMSIZE = "3000"      # max memory for each VM
 CFG_TZ = "US/Pacific"     # timezone, like US/Pacific, US/Eastern, UTC, Europe/Warsaw, etc.
 CFG_IP = "10.211.54.10"   # private IP address
 
+# if local Debian proxy configured (DEB_CACHE_HOST), install and configure the proxy client
+deb_cache_cmds = ""
+if ENV['DEB_CACHE_HOST']
+  deb_cache_host = ENV['DEB_CACHE_HOST']
+  deb_cache_cmds = <<CACHE
+apt-get install squid-deb-proxy-client -y
+echo 'Acquire::http::Proxy "#{deb_cache_host}";' | sudo tee /etc/apt/apt.conf.d/30autoproxy
+echo "Acquire::http::Proxy { debian.datastax.com DIRECT; };" | sudo tee -a /etc/apt/apt.conf.d/30autoproxy
+cat /etc/apt/apt.conf.d/30autoproxy
+CACHE
+end
+
+# Provisioning script
 node_script = <<SCRIPT
 #!/bin/bash
 
@@ -20,9 +33,7 @@ node_script = <<SCRIPT
 echo "#{CFG_TZ}" > /etc/timezone    
 dpkg-reconfigure -f noninteractive tzdata
 
-# install and configure for local debian proxy (if present)
-apt-get install squid-deb-proxy-client -y
-cp /vagrant/apt-proxy /etc/apt/apt.conf.d/30autoproxy
+#{deb_cache_cmds}
 
 # install a few base packages
 apt-get update
@@ -33,7 +44,7 @@ apt-get install openjdk-7-jre -y
 SCRIPT
 
 
-# VM configurations
+# Configure VM server
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|

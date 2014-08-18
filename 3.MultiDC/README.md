@@ -10,7 +10,6 @@ The Vagrantfile in this example creates the VMs, installs OpsCenter and Cassandr
 Notes:
 
 * Depending on how much memory your host system has, you may need to lower the default memory size for each VM. Currently it's set to 1500 MB for each VM, but with all 7 running it may be too much for your host.
-* Running a local Debian package proxy cache ([bcantoni/vagrant-deb-proxy](https://github.com/bcantoni/vagrant-deb-proxy)) will make the provisioning step much faster.
 
 ## Instructions
 

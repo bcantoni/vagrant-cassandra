@@ -12,7 +12,7 @@ Here are a few related projects I learned from while assembling my Vagrant setup
 * [dholbrook/vagrant-cassandra](https://github.com/dholbrook/vagrant-cassandra) - another Chef
 * [oeelvik/vagrant-puppet-hadoop-datastax](https://github.com/oeelvik/vagrant-puppet-hadoop-datastax) - using Puppet for provisioning
 
-You may also find [bcantoni/vagrant-deb-proxy](https://github.com/bcantoni/vagrant-deb-proxy) helpful for speeding up Ubuntu package installs.
+You may also find [bcantoni/vagrant-deb-proxy](https://github.com/bcantoni/vagrant-deb-proxy) helpful for speeding up Ubuntu package installs. See Package Caching below for details.
 
 ## Cassandra vs DataStax
 
@@ -46,7 +46,6 @@ Note: These scripts were created on a Mac OS X 10.9.4 host with Vagrant v1.6.3 a
    Alternatively, try the [vagrant-hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater) plugin which should do the same thing automatically.
 1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 1. Install [Vagrant](https://www.vagrantup.com/downloads)
-1. Install and start [bcantoni/vagrant-deb-proxy](https://github.com/bcantoni/vagrant-deb-proxy) to make the provisioning steps much faster
 1. Check that both are installed and reachable from a command line:
 
         $ vagrant --version
@@ -64,6 +63,17 @@ Note: These scripts were created on a Mac OS X 10.9.4 host with Vagrant v1.6.3 a
         $ cd 1.Base
         $ vagrant up
         $ vagrant ssh
+
+## Package Caching
+
+These Vagrant files are configured to use a Debian/Ubuntu APT cache if configured. This can make the provisioning step faster and less susceptible to Ubuntu repository connection speeds.
+
+If you want to run your own locally (through Vagrant), take a look at [bcantoni/vagrant-deb-proxy](https://github.com/bcantoni/vagrant-deb-proxy).
+
+To enable package caching, set the `DEB_CACHE_HOST` environment variable before creating the Vagrant VMs, for example:
+
+    $ export DEB_CACHE_HOST="http://10.211.54.100:8000"
+    $ vagrant up
 
 ## Using Vagrant
 

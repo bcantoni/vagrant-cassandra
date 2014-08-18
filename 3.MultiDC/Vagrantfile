@@ -17,6 +17,18 @@ SERVER_COUNT = 7
 NETWORK = '10.211.55.'
 FIRST_IP = 110
 
+# if local Debian proxy configured (DEB_CACHE_HOST), install and configure the proxy client
+deb_cache_cmds = ""
+if ENV['DEB_CACHE_HOST']
+  deb_cache_host = ENV['DEB_CACHE_HOST']
+  deb_cache_cmds = <<CACHE
+apt-get install squid-deb-proxy-client -y
+echo 'Acquire::http::Proxy "#{deb_cache_host}";' | sudo tee /etc/apt/apt.conf.d/30autoproxy
+echo "Acquire::http::Proxy { debian.datastax.com DIRECT; };" | sudo tee -a /etc/apt/apt.conf.d/30autoproxy
+cat /etc/apt/apt.conf.d/30autoproxy
+CACHE
+end
+
 # Provisioning script for Opscenter node (node10)
 opsc_script = <<SCRIPT
 #!/bin/bash
@@ -43,9 +55,7 @@ EOF
 echo "#{CFG_TZ}" > /etc/timezone    
 dpkg-reconfigure -f noninteractive tzdata
 
-# install and configure for local debian proxy (if present)
-apt-get install squid-deb-proxy-client -y
-cp /vagrant/apt-proxy /etc/apt/apt.conf.d/30autoproxy
+#{deb_cache_cmds}
 
 # install a few base packages
 apt-get update
@@ -87,9 +97,7 @@ EOF
 echo "#{CFG_TZ}" > /etc/timezone    
 dpkg-reconfigure -f noninteractive tzdata
 
-# install and configure for local debian proxy (if present)
-apt-get install squid-deb-proxy-client -y
-cp /vagrant/apt-proxy /etc/apt/apt.conf.d/30autoproxy
+#{deb_cache_cmds}
 
 # install a few base packages
 apt-get update

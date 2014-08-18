@@ -8,7 +8,6 @@ This Vagrant template sets up 4 separate VMs for creating a Cassandra cluster:
 Notes:
 
 * Depending on how much memory your host system has, you may need to lower the default memory size for each VM. Currently it's set to 3GB for each VM, but with all 4 running it may be too much for your host.
-* Running a local Debian package proxy cache ([bcantoni/vagrant-deb-proxy](https://github.com/bcantoni/vagrant-deb-proxy)) will make the provisioning step much faster.
 
 ## Instructions
 
