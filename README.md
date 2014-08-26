@@ -102,7 +102,7 @@ This template creates 4 VMs: one for OpsCenter and 3 for Cassandra nodes. OpsCen
 
 ### 3. MultiDC
 
-This template builds and configures a multi-datacenter cluster (one OpsCenter VM and 6 Cassandra nodes in 2 datacenters).
+This template builds and configures a multi-datacenter cluster (one OpsCenter VM and 6 Cassandra nodes in 2 logical datacenters).
 
 ## Notes
 

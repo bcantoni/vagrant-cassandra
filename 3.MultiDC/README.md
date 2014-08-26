@@ -5,7 +5,7 @@ This Vagrant template sets up 7 separate VMs for creating a multi-datacenter Cas
 * node10 - [OpsCenter](http://www.datastax.com/what-we-offer/products-services/datastax-opscenter) host
 * node[11-16] - [Cassandra](http://planetcassandra.org/cassandra/) nodes
 
-The Vagrantfile in this example creates the VMs, installs OpsCenter and Cassandra, then configures the 6-node cluster into two different virtual datacenters (DC1 and DC2).
+The Vagrantfile in this example creates the VMs, installs OpsCenter and Cassandra, then configures the 6-node cluster into two different logical datacenters (DC1 and DC2).
 
 Notes:
 
