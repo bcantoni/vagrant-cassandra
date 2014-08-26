@@ -23,6 +23,16 @@ In this project I tend to use the terms "Cassandra" and "DataStax" interchangeab
     * [DataStax Community](http://planetcassandra.org/cassandra/) - includes Cassandra, OpsCenter, demos, and installers for Linux, Windows, and Mac. This is free for everyone to use.
     * [DataStax Enterprise](http://www.datastax.com/what-we-offer/products-services/datastax-enterprise) - a commercial integrated product which includes Analytics (Hadoop) and Search (Solr) modules, on top of the basic Community edition. This build can be run for free in development (after registration). Using in production requires a paid license agreement which would then include support, training, and so on.
 
+## Screencasts
+
+Here are some quick screencasts which walk through the three different templates in this project:
+
+[![Vagrant Cassandra Single Node Screencast](http://img.youtube.com/vi/tjNLQNYd3Rc/0.jpg)](http://www.youtube.com/watch?v=tjNLQNYd3Rc)
+
+[![Vagrant Cassandra Multi Node Screencast](http://img.youtube.com/vi/xaVqvNeNlKM/0.jpg)](http://www.youtube.com/watch?v=xaVqvNeNlKM)
+
+[![Vagrant Cassandra Multi Datacenter Screencast](http://img.youtube.com/vi/rTGSfmpgqP0/0.jpg)](http://www.youtube.com/watch?v=rTGSfmpgqP0)
+
 ## Installation
 
 Note: These scripts were created on a Mac OS X 10.9.4 host with Vagrant v1.6.3 and VirtualBox v4.3.12. Everything should work for Windows hosts as well, but I have not tested it yet.
