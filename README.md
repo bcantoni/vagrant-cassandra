@@ -11,6 +11,7 @@ Here are a few related projects I learned from while assembling my Vagrant setup
 * [calebgroom/vagrant-cassandra](https://github.com/calebgroom/vagrant-cassandra) - uses Chef to quickly create a 3-node cluster
 * [dholbrook/vagrant-cassandra](https://github.com/dholbrook/vagrant-cassandra) - another Chef
 * [oeelvik/vagrant-puppet-hadoop-datastax](https://github.com/oeelvik/vagrant-puppet-hadoop-datastax) - using Puppet for provisioning
+* [cjohannsen81/dse-vagrant](https://github.com/cjohannsen81/dse-vagrant) - similar to my approach, just using script provisioning
 
 You may also find [bcantoni/vagrant-deb-proxy](https://github.com/bcantoni/vagrant-deb-proxy) helpful for speeding up Ubuntu package installs. See Package Caching below for details.
 
