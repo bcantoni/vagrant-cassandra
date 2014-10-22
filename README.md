@@ -115,6 +115,10 @@ This template creates 4 VMs: one for OpsCenter and 3 for Cassandra nodes. OpsCen
 
 This template builds and configures a multi-datacenter cluster (one OpsCenter VM and 6 Cassandra nodes in 2 logical datacenters).
 
+### 4. DSE
+
+This template focuses on DataStax Enterprise (DSE) and can build a variable number of nodes in a cluster.
+
 ## Notes
 
 * All templates are currently based off the `hashicorp/precise64` box which is running 64-bit Ubuntu 12.04 LTS. You can change the `vm.box` value if you want to try different guest operating system versions (e.g. use `ubuntu/trusty64` for Ubuntu 14.04).
