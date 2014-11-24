@@ -14,7 +14,7 @@ Notes:
 
 To use DSE you will need to register at [DataStax](http://www.datastax.com/download). This process will give you a username and password which enable free use of DSE in development environments.
 
-Assuming you already have Vagrant installed, you can bring up the 4 VMs with the following:
+Assuming you already have Vagrant installed, you can bring up the DSE nodes with the following:
 
 ```
 $ export VAGRANT_DSE_USERNAME=your-username
@@ -30,18 +30,29 @@ $ vagrant status
 Building 3 DSE node(s)
 Current machine states:
 
-dse0                     running (virtualbox)
-dse1                     running (virtualbox)
-dse2                     running (virtualbox)
+dse0           running (virtualbox)
+dse1           running (virtualbox)
+dse2           running (virtualbox)
+```
+
+```
+$ vagrant ssh dse0
+vagrant@dse0:~$ nodetool status
+Datacenter: Cassandra
+=====================
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address      Load       Tokens  Owns   Host ID                               Rack
+UN  10.10.10.10  157.87 MB  1       56.0%  76dc4bac-eb49-48da-849b-bc26c7ff4522  rack1
+UN  10.10.10.11  126.17 MB  1       13.3%  3d76cf09-5140-47f7-a15c-32f096d467e2  rack1
+UN  10.10.10.12  88.19 MB   1       30.7%  91015c51-8c39-4da7-ac8d-cfe770fe0d85  rack1
 ```
 
 ### Configure DSE
 
-Now you'll have an N-node cluster of DSE which needs to be configured.
+The default configuration will join all nodes together into a single cluster (with dse0 as the seed node) and start the services. For reference, see the [DataStax Enterprise 4.5 documentation](http://www.datastax.com/documentation/datastax_enterprise/4.5/datastax_enterprise/deploy/deploySingleDC.html) for all the details on DSE configuration settings.
 
 Mac users might find [bcantoni/i2cssh](https://github.com/bcantoni/i2cssh) helpful. It will connect with all Vagrant nodes in parallel iTerm2 shell windows: `i2cssh -v`.
-
-For reference, see the [DataStax Enterprise 4.5 documentation](http://www.datastax.com/documentation/datastax_enterprise/4.5/datastax_enterprise/deploy/deploySingleDC.html) if you aren't familiar with DSE configuration settings.
 
 ### Shut Down
 
@@ -51,7 +62,7 @@ To cleanly shut down all VMs (example for 3 nodes):
 $ for i in {0..2}; do vagrant ssh dse$i -c 'sudo shutdown -h now'; done
 ```
 
-To destroy all 4 VMs:
+To destroy all VMs:
 
 ```
 $ vagrant destroy -f
