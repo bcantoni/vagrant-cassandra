@@ -42,6 +42,12 @@ Note: These scripts were created on a Mac OS X 10.9.4 host with Vagrant v1.6.3 a
 
         # vagrant-cassandra private network hosts
         10.211.54.10    cassandra
+        10.10.10.10     dse0
+        10.10.10.11     dse1
+        10.10.10.12     dse2
+        10.10.10.13     dse3
+        10.10.10.14     dse4
+        10.10.10.15     dse5
         10.211.55.100   node0
         10.211.55.101   node1
         10.211.55.102   node2
@@ -54,15 +60,15 @@ Note: These scripts were created on a Mac OS X 10.9.4 host with Vagrant v1.6.3 a
         10.211.55.115   node15
         10.211.55.116   node16
 
-   Alternatively, try the [vagrant-hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater) plugin which should do the same thing automatically.
+   Alternatively, try the [vagrant-hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater) plugin which should do the same thing automatically. (I have not tried it.)
 1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 1. Install [Vagrant](https://www.vagrantup.com/downloads)
 1. Check that both are installed and reachable from a command line:
 
         $ vagrant --version
-        Vagrant 1.6.0
+        Vagrant 1.6.5
         $ VBoxManage --version
-        4.3.12r93733
+        4.3.18r96516
 
 1. Clone this repository
 
