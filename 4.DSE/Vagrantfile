@@ -97,9 +97,18 @@ apt-get install vim zip unzip git python-pip openjdk-7-jre -y
 # install DSE
 apt-get install dse-full -y
 
+# configure DSE
+echo "Configuring DataStax Enterprise"
+sudo sed -i 's/- seeds:.*$/- seeds: dse0/'                       /etc/dse/cassandra/cassandra.yaml
+sudo sed -i 's/listen_address:.*$/listen_address: %s/' /etc/dse/cassandra/cassandra.yaml
+sudo sed -i 's/rpc_address:.*$/rpc_address: 0.0.0.0/'            /etc/dse/cassandra/cassandra.yaml
+
+# start DSE
+echo "Starting DataStax Enterprise"
+sudo service dse start
+
 echo "Vagrant provisioning complete"
 SCRIPT
-
 
 # Configure VM servers
 servers = []
@@ -116,8 +125,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   servers.each do |server|
     config.vm.define server['name'] do |config2|
       config2.vm.hostname = server['name']
-      config2.vm.network :private_network, ip: server['ip']
-      config2.vm.provision :shell, :inline => node_script
+      server_ip = server['ip']
+      config2.vm.network :private_network, ip: server_ip
+      config2.vm.provision :shell, :inline => node_script % server_ip
 
       config2.vm.provider "vmware_fusion" do |v|
         v.vmx["memsize"]  = CFG_MEMSIZE
