@@ -9,7 +9,7 @@
 # Set these environment variables before running `vagrant up`:
 #   Optional:
 #     DEB_CACHE_HOST = Debian package cache, e.g. "http://192.168.1.100:8000" (default: no cache)
-#     VAGRANT_DSE_NODES = number of nodes to bring up (default: 1)
+#     VAGRANT_DSE_NODES = number of nodes to bring up (default: 2)
 #   Required:
 #     VAGRANT_DSE_USERNAME = username from DataStax registration
 #     VAGRANT_DSE_PASSWORD = password from DataStax registration
@@ -24,7 +24,7 @@ FIRST_IP = 10
 if ENV['VAGRANT_DSE_NODES']
   dse_nodes = ENV['VAGRANT_DSE_NODES'].to_i
 else
-  dse_nodes = 1
+  dse_nodes = 2
 end
 
 # if doing a vargrant up or reload, require to have the username password
