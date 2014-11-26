@@ -112,7 +112,7 @@ curl --silent -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
 
 # install DataStax community
 apt-get update
-apt-get install dsc20 datastax-agent -y
+apt-get install dsc20 cassandra=2.0.11 datastax-agent -y
 
 # stop service if running
 echo "Stopping Cassandra..."
