@@ -35,12 +35,11 @@ dpkg-reconfigure -f noninteractive tzdata
 
 #{deb_cache_cmds}
 
-# install a few base packages
+# install Java and a few base packages
 apt-get update
-apt-get install vim curl zip unzip git python-pip -y
+apt-get install vim curl zip unzip git python-pip openjdk-7-jdk -y
 
-# install java
-apt-get install openjdk-7-jre -y
+echo "Vagrant provisioning complete"
 SCRIPT
 
 

@@ -57,18 +57,18 @@ dpkg-reconfigure -f noninteractive tzdata
 
 #{deb_cache_cmds}
 
-# install a few base packages
-apt-get update
-apt-get install vim curl zip unzip git python-pip -y
-
-# install OpsCenter
+# add DataStax repo for APT
 echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/datastax.community.list
-curl --silent -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
+wget -q -O - http://debian.datastax.com/debian/repo_key | sudo apt-key add -
 apt-get update
-apt-get install opscenter -y
+
+# install OpsCenter and a few base packages
+apt-get install vim curl zip unzip git python-pip opscenter -y
+
+# start OpsCenter
 service opscenterd start
 
-echo "Vagrant provisioning complete"
+echo "Vagrant provisioning complete and OpsCenter started"
 SCRIPT
 
 # Provisioning script for Cassandra nodes (node11-16)
@@ -99,27 +99,21 @@ dpkg-reconfigure -f noninteractive tzdata
 
 #{deb_cache_cmds}
 
-# install a few base packages
-apt-get update
-apt-get install vim curl zip unzip git python-pip python-support -y
-
-# install java
-apt-get install openjdk-7-jre libjna-java -y
-
 # configure DataStax repo
 echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
-curl --silent -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
-
-# install DataStax community
+wget -q -O - http://debian.datastax.com/debian/repo_key | sudo apt-key add -
 apt-get update
-apt-get install dsc20 cassandra=2.0.11 datastax-agent -y
 
-# stop service if running
+# install Java first, then DataStax Community Edition
+apt-get install openjdk-7-jdk libjna-java -y
+apt-get install vim curl zip unzip git python-pip python-support dsc20 cassandra=2.0.11 datastax-agent -y
+
+# stop Cassandra (which automatically starts after install) and clear data files
 echo "Stopping Cassandra..."
 service cassandra stop
 rm -rf /var/lib/cassandra/data/system/*
 
-# copy datacenter config files and restart service
+# copy datacenter config files and restart Cassandra
 cp /vagrant/cassandra.yaml /etc/cassandra
 cp /vagrant/cassandra-topology.properties /etc/cassandra
 echo "stomp_interface: 10.211.55.110" | sudo tee -a /var/lib/datastax-agent/conf/address.yaml
