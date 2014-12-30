@@ -36,7 +36,7 @@ Here are some quick screencasts which walk through the three different templates
 
 ## Installation
 
-Note: These scripts were created on a Mac OS X 10.9.4 host with Vagrant v1.6.3 and VirtualBox v4.3.12. Everything should work for Windows hosts as well, but I have not tested it yet.
+Note: These scripts were created on a Mac OS X 10.9.5 host with Vagrant v1.6.5 and VirtualBox v4.3.20. Everything should work for Linux or Windows hosts as well, but I have not tested it yet. Shell scripts which are meant to run on the host (like up-parallel.sh or down.sh) would need to have Windows equivalents created.
 
 1. Edit your local Hosts file to include the private network addresses (this makes it much easier to refer to the VMs by hostname):
 
@@ -47,7 +47,11 @@ Note: These scripts were created on a Mac OS X 10.9.4 host with Vagrant v1.6.3 a
         10.10.10.12     dse2
         10.10.10.13     dse3
         10.10.10.14     dse4
-        10.10.10.15     dse5
+        10.10.11.10     dse10
+        10.10.11.11     dse11
+        10.10.11.12     dse12
+        10.10.11.13     dse13
+        10.10.11.14     dse14
         10.211.55.100   node0
         10.211.55.101   node1
         10.211.55.102   node2
@@ -68,7 +72,7 @@ Note: These scripts were created on a Mac OS X 10.9.4 host with Vagrant v1.6.3 a
         $ vagrant --version
         Vagrant 1.6.5
         $ VBoxManage --version
-        4.3.18r96516
+        4.3.20r96996
 
 1. Clone this repository
 
@@ -124,6 +128,10 @@ This template builds and configures a multi-datacenter cluster (one OpsCenter VM
 ### 4. DSE
 
 This template focuses on DataStax Enterprise (DSE) and can build a variable number of nodes in a cluster.
+
+### 5. Installer
+
+This template is structurally the same as 4.DSE, but instead uses the Standalone Installer which first came out with DSE 4.5.
 
 ## Notes
 
