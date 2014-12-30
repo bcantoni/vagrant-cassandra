@@ -40,8 +40,6 @@ if ARGV[0] == 'up' or ARGV[0] == 'reload'
   else
     abort ("Error: VAGRANT_DSE_USERNAME and VAGRANT_DSE_PASSWORD must be set with DataStax user credentials (register at datastax.com/register)")
   end
-
-  puts "Building #{dse_nodes} DSE node(s)"
 end
 
 # if local Debian proxy configured (DEB_CACHE_HOST), install and configure the proxy client
@@ -107,6 +105,7 @@ echo "Vagrant provisioning complete"
 SCRIPT
 
 # Configure VM servers
+puts "Configured for #{dse_nodes} DSE node(s)"
 servers = []
 (0..dse_nodes-1).each do |i|
   name = 'dse' + i.to_s
