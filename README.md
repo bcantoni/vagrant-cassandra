@@ -129,7 +129,7 @@ This template builds and configures a multi-datacenter cluster (one OpsCenter VM
 
 This template focuses on DataStax Enterprise (DSE) and can build a variable number of nodes in a cluster.
 
-### [5. Installer](5.DSE)
+### [5. Installer](5.Installer)
 
 This template is structurally the same as 4.DSE, but instead uses the Standalone Installer which first came out with DSE 4.5.
 
