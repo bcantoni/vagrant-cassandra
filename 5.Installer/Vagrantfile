@@ -93,8 +93,18 @@ apt-get update
 apt-get install vim curl zip unzip git python-pip openjdk-7-jdk -y
 
 # install DSE with unattended installer
+#
+# by default we do a services install, create Cassandra-only nodes, and set the first node (dse10) as the seed
+#
+# other options worth exploring include:
+#  --node_type=search
+#  --node_type=analytics
+#  --analytics_type=spark_only
+#  --ring_name
+#
 # refer to the documentation to see all the unattended options available:
 #  http://www.datastax.com/documentation/datastax_enterprise/4.6/datastax_enterprise/install/installSilent.html
+
 chmod +x /vagrant/#{INSTALLER_FILENAME}
 set -x
 sudo /vagrant/#{INSTALLER_FILENAME} --mode unattended --update_system 0 --seeds 10.10.11.10 --interface %s --start_services 1
