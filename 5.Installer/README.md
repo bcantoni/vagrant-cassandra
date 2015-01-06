@@ -20,8 +20,10 @@ Next you will need to download the Standalone Installer from the [DataStax downl
 If you want to script the installer download step, you can use wget like:
 
 ```
-wget http://downloads.datastax.com/enterprise/DataStaxEnterprise-4.6-linux-x64-installer.run --user=$VAGRANT_DSE_USERNAME --password=$VAGRANT_DSE_PASSWORD
+wget http://downloads.datastax.com/enterprise/DataStaxEnterprise-4.6-linux-x64-installer.run --user=your-username --password=your-password
 ```
+
+### Create VM Cluster
 
 Now you can bring up the DSE nodes with the following:
 
@@ -32,7 +34,7 @@ $ export VAGRANT_DSE_NODES=3
 $ ./up-parallel.sh
 ```
 
-This will bring up each VM in series and then provision each in parallel. (You could instead use the normal `vagrant up` which will build each VM in series and will be slower.)
+This will bring up each Vagrant VM in series and then provision each in parallel. (You could instead use the normal `vagrant up` which will build each VM in series and will be slower.)
 
 Make sure to read the Unattended Install section below which explains what just happened.
 
@@ -67,7 +69,7 @@ UN  10.10.11.11  88.92 KB   256     33.9%  9ea12f48-1751-4b68-8394-5a851effb5bd 
 
 This Vagrant template uses the unattended mode of the DSE installer. After the installer file is downloaded locally on the host, it will be available under the `/vagrant` directory inside the guest. The provisioning script will run the installer in unattended mode and pass a few options:
 
-* mode: unattended (to enable unattended mode)
+* mode: unattended (enable unattended mode)
 * update_system: 0 (don't update any system packages)
 * seeds: 10.10.11.10 (dse10 node)
 * interface: 10.10.11.x (this node's IP address)
@@ -84,7 +86,7 @@ Refer to these documentation pages for more details on the available options:
 
 The DSE installer also has a corresponding uninstaller. Refer to the [unattended uninstaller documentation](http://www.datastax.com/documentation/datastax_enterprise/4.6/datastax_enterprise/install/installremove.html) for more details.
 
-To try this on a node, follow these steps which will not drain the node (do_drain=0) and will remove all Cassandra data along with the services (full_uninstall=1):
+To try this on a node, follow this example which will not drain the node (do_drain=0), but will remove all Cassandra data along with the services (full_uninstall=1):
 
 ```
 $ vagrant ssh dse10
