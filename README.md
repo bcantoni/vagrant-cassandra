@@ -28,10 +28,13 @@ In this project I tend to use the terms "Cassandra" and "DataStax" interchangeab
 
 Here are some quick screencasts which walk through the three different templates in this project:
 
+### 1. Base
 [![Vagrant Cassandra Single Node Screencast](http://img.youtube.com/vi/tjNLQNYd3Rc/0.jpg)](http://www.youtube.com/watch?v=tjNLQNYd3Rc)
 
+### 2. MultiNode
 [![Vagrant Cassandra Multi Node Screencast](http://img.youtube.com/vi/xaVqvNeNlKM/0.jpg)](http://www.youtube.com/watch?v=xaVqvNeNlKM)
 
+### 3. MultiDC
 [![Vagrant Cassandra Multi Datacenter Screencast](http://img.youtube.com/vi/rTGSfmpgqP0/0.jpg)](http://www.youtube.com/watch?v=rTGSfmpgqP0)
 
 ## Installation
