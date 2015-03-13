@@ -15,6 +15,11 @@ Here are a few related projects I learned from while assembling my Vagrant setup
 
 You may also find [bcantoni/vagrant-deb-proxy](https://github.com/bcantoni/vagrant-deb-proxy) helpful for speeding up Ubuntu package installs. See Package Caching below for details.
 
+Posts from my blog related to this project:
+
+* [Using Vagrant for Local Cassandra Development](http://www.cantoni.org/2014/08/26/vagrant-cassandra)
+* [DataStax Installer with Vagrant](http://www.cantoni.org/2015/01/05/datastax-installer-vagrant)
+
 ## Cassandra vs DataStax
 
 In this project I tend to use the terms "Cassandra" and "DataStax" interchangeably. Here's the distinction:
