@@ -19,7 +19,7 @@ MAX_PROCS=4
 vagrant up --no-provision
  
 # initiate provision tasks to run in parallel
-for i in $(seq 1 ${VAGRANT_DSE_NODES=1})
+for i in $(seq 1 2)
 do
   box=dse1$((i-1))
   echo "Provisioning '$box'. Output will be in: $box.out.txt" 1>&2

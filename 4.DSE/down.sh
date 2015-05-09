@@ -3,9 +3,9 @@
 # Vagrant Cassandra Project
 # Brian Cantoni
 #
-# Clean shutdown of each node (rather than just vagrant halting everything)
+# Clean shutdown of each DSE node (rather than just vagrant halting everything)
 
-for i in $(seq 1 ${VAGRANT_DSE_NODES=2})
+for i in $(seq 1 4)
 do
   j=$((i-1))
   echo Shutting down dse$j

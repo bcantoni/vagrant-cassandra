@@ -19,7 +19,6 @@ Assuming you already have Vagrant installed, you can bring up the DSE nodes with
 ```
 $ export VAGRANT_DSE_USERNAME=your-username
 $ export VAGRANT_DSE_PASSWORD=your-password
-$ export VAGRANT_DSE_NODES=3
 $ vagrant up
 ```
 
@@ -52,7 +51,7 @@ UN  10.10.10.12  88.19 MB   1       30.7%  91015c51-8c39-4da7-ac8d-cfe770fe0d85 
 
 The default configuration will join all nodes together into a single cluster (with dse0 as the seed node) and start the services. For reference, see the [DataStax Enterprise 4.6 documentation](http://www.datastax.com/documentation/datastax_enterprise/4.6/datastax_enterprise/deploy/deploySingleDC.html) for all the details on DSE configuration settings.
 
-Mac users might find [bcantoni/i2cssh](https://github.com/bcantoni/i2cssh) helpful. It will connect with all Vagrant nodes in parallel iTerm2 shell windows: `i2cssh -v`. (Make sure to set VAGRANT_DSE_NODES in `~/.profile` first.)
+Mac users might find [bcantoni/i2cssh](https://github.com/bcantoni/i2cssh) helpful. It will connect with all Vagrant nodes in parallel iTerm2 shell windows: `i2cssh -v`.
 
 ### Shut Down
 

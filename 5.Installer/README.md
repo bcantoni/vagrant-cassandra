@@ -7,7 +7,7 @@ This Vagrant template sets up DataStax Enterprise (DSE) on a configurable number
 Notes:
 
 * Depending on how much memory your host system has, you may need to lower the default memory size for each VM. Currently it's set to 3GB for each VM.
-* Mac users might find [bcantoni/i2cssh](https://github.com/bcantoni/i2cssh) helpful. It will connect with all Vagrant nodes in parallel iTerm2 shell windows: `i2cssh -v`. (Make sure to set VAGRANT_DSE_NODES in `~/.profile` first.)
+* Mac users might find [bcantoni/i2cssh](https://github.com/bcantoni/i2cssh) helpful. It will connect with all Vagrant nodes in parallel iTerm2 shell windows: `i2cssh -v`.
 
 ## Instructions
 
@@ -30,7 +30,6 @@ Now you can bring up the DSE nodes with the following:
 ```
 $ export VAGRANT_DSE_USERNAME=your-username
 $ export VAGRANT_DSE_PASSWORD=your-password
-$ export VAGRANT_DSE_NODES=3
 $ ./up-parallel.sh
 ```
 
