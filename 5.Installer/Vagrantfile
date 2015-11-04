@@ -9,9 +9,6 @@
 # Set these environment variables before running `vagrant up`:
 #   Optional:
 #     DEB_CACHE_HOST = Debian package cache, e.g. "http://192.168.1.100:8000" (default: no cache)
-#   Required:
-#     VAGRANT_DSE_USERNAME = username from DataStax registration
-#     VAGRANT_DSE_PASSWORD = password from DataStax registration
 
 # Adjustable settings
 INSTALLER_FILENAME = "DataStaxEnterprise-4.6-linux-x64-installer.run"
@@ -22,21 +19,6 @@ FIRST_IP = 10
 
 # number of nodes to create
 DSE_NODES = 2
-
-# if doing a vargrant up or reload, require to have the username password
-if ARGV[0] == 'up' or ARGV[0] == 'reload'
-  if ENV['VAGRANT_DSE_USERNAME']
-    dse_username = ENV['VAGRANT_DSE_USERNAME']
-  else
-    abort ("Error: VAGRANT_DSE_USERNAME and VAGRANT_DSE_PASSWORD must be set with DataStax user credentials (register at datastax.com/register)")
-  end
-
-  if ENV['VAGRANT_DSE_PASSWORD']
-    dse_password = ENV['VAGRANT_DSE_PASSWORD']
-  else
-    abort ("Error: VAGRANT_DSE_USERNAME and VAGRANT_DSE_PASSWORD must be set with DataStax user credentials (register at datastax.com/register)")
-  end
-end
 
 # make sure installer had already been downloaded
 if !File.file?(INSTALLER_FILENAME)
