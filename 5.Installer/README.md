@@ -15,25 +15,25 @@ Notes:
 
 To use DSE you will need to register at [DataStax](http://www.datastax.com/download). This process will give you a username and password which enable free use of DSE in development environments.
 
-Next you will need to download the Standalone Installer from the [DataStax download page](http://www.datastax.com/download). Save it in the `vagrant-cassandra/5.Installer` directory. The downloaded file should be named `DataStaxEnterprise-4.6-linux-x64-installer.run` for DSE 4.6. (For older or newer versions, modify the INSTALLER_FILENAME setting in Vagrantfile.) 
+Next you will need to download the installer (Install Package for Linux) from the [DataStax download page](http://www.datastax.com/download). Save it in the `vagrant-cassandra/5.Installer` directory. The downloaded file should be named something like `DataStaxEnterprise-4.8.1.2015102316-linux-x64-installer.run` for DSE 4.8. (For older or newer versions, modify the INSTALLER_FILENAME setting in Vagrantfile.)
 
 If you want to script the installer download step, you can use wget like:
 
 ```
-wget http://downloads.datastax.com/enterprise/DataStaxEnterprise-4.6-linux-x64-installer.run --user=your-username --password=your-password
+wget http://downloads.datastax.com/enterprise/DataStaxEnterprise-4.8-linux-x64-installer.run --user=your-username --password=your-password
 ```
+
+Configure the number of nodes you want by editing the `DSE_NODES` value in Vagrantfile. (The default is 2 nodes.)
 
 ### Create VM Cluster
 
 Now you can bring up the DSE nodes with the following:
 
 ```
-$ export VAGRANT_DSE_USERNAME=your-username
-$ export VAGRANT_DSE_PASSWORD=your-password
-$ ./up-parallel.sh
+$ vagrant up
 ```
 
-This will bring up each Vagrant VM in series and then provision each in parallel. (You could instead use the normal `vagrant up` which will build each VM in series and will be slower.)
+Note: For a faster way (especially when doing more than one node), edit up-parallel.sh to set the number of nodes (the `for i in $(seq 1 2)` line, default 2), then run it with `./up-parallel.sh`. This will bring up each Vagrant VM in series and then provision them all in parallel.
 
 Make sure to read the Unattended Install section below which explains what just happened.
 
@@ -46,7 +46,6 @@ Current machine states:
 
 dse10           running (virtualbox)
 dse11           running (virtualbox)
-dse12           running (virtualbox)
 ```
 
 Then login to one node and make sure the cluster is up and running:
@@ -58,10 +57,21 @@ Datacenter: Cassandra
 =====================
 Status=Up/Down
 |/ State=Normal/Leaving/Joining/Moving
---  Address      Load       Tokens  Owns   Host ID                               Rack
-UN  10.10.11.12  85.32 KB   256     33.4%  27d44519-56c2-4da6-b0e6-77ef27c83e80  rack1
-UN  10.10.11.10  68.63 KB   256     32.7%  a09e0151-3665-4a9b-bd00-beaeb08891ee  rack1
-UN  10.10.11.11  88.92 KB   256     33.9%  9ea12f48-1751-4b68-8394-5a851effb5bd  rack1
+--  Address      Load       Tokens  Owns    Host ID                               Rack
+UN  10.10.11.10  82.51 KB   256     ?       0f01e43f-f819-4eb1-8d27-9ccd5342811a  rack1
+UN  10.10.11.11  88.1 KB    256     ?       796597c3-1496-4ba7-b853-75f5d4052398  rack1
+
+vagrant@dse10:~$ cqlsh dse10
+Connected to Test Cluster at dse10:9042.
+[cqlsh 5.0.1 | Cassandra 2.1.11.872 | DSE 4.8.1 | CQL spec 3.2.1 | Native protocol v3]
+Use HELP for help.
+cqlsh> select count(*) from system.peers;
+
+ count
+-------
+     1
+
+(1 rows)
 ```
 
 ### Unattended Install
@@ -78,12 +88,12 @@ Installer options can also be defined in a properties file which is then passed 
 
 Refer to these documentation pages for more details on the available options:
 
-* [Unattended DataStax Enterprise installer documentation](http://www.datastax.com/documentation/datastax_enterprise/4.6/datastax_enterprise/install/installSilent.html)
-* [DataStax Enterprise 4.6 documentation](http://www.datastax.com/documentation/datastax_enterprise/4.6/datastax_enterprise/deploy/deploySingleDC.html)
+* [Unattended DataStax Enterprise installer documentation](http://docs.datastax.com/en/datastax_enterprise/4.8/datastax_enterprise/install/installSilent.html)
+* [DataStax Enterprise 4.8 documentation](http://docs.datastax.com/en/datastax_enterprise/4.8/datastax_enterprise/deploy/deploySingleDC.html)
 
 ### Unattended Uninstall
 
-The DSE installer also has a corresponding uninstaller. Refer to the [unattended uninstaller documentation](http://www.datastax.com/documentation/datastax_enterprise/4.6/datastax_enterprise/install/installremove.html) for more details.
+The DSE installer also has a corresponding uninstaller. Refer to the [unattended uninstaller documentation](http://docs.datastax.com/en/datastax_enterprise/4.8/datastax_enterprise/install/installremove.html) for more details.
 
 To try this on a node, follow this example which will not drain the node (do_drain=0), but will remove all Cassandra data along with the services (full_uninstall=1):
 
@@ -96,6 +106,8 @@ do_drain=0
 full_uninstall=1
 vagrant@dse10:/usr/share/dse$ sudo ./uninstall --mode unattended
 ```
+
+Repeat the above for each node as needed.
 
 ### Shut Down
 
