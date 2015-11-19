@@ -41,7 +41,7 @@ When the up command is done, you can check the status of the VMs:
 
 ```
 $ vagrant status
-Building 3 DSE node(s)
+Building 2 DSE node(s)
 Current machine states:
 
 dse10           running (virtualbox)
