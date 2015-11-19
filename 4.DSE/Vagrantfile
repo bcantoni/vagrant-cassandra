@@ -20,7 +20,7 @@ NETWORK = '10.10.10.'   # base IP for DSE nodes
 FIRST_IP = 10
 
 # number of nodes to create
-DSE_NODES = 2
+DSE_NODES = 3
 
 # if doing a vargrant up or reload, require to have the username password
 if ARGV[0] == 'up' or ARGV[0] == 'reload'
@@ -90,7 +90,7 @@ apt-get install vim curl zip unzip git python-pip openjdk-7-jdk dse-full -y
 echo "Configuring DataStax Enterprise"
 sudo sed -i 's/- seeds:.*$/- seeds: dse0/'             /etc/dse/cassandra/cassandra.yaml
 sudo sed -i 's/listen_address:.*$/listen_address: %s/' /etc/dse/cassandra/cassandra.yaml
-sudo sed -i 's/rpc_address:.*$/rpc_address: 0.0.0.0/'  /etc/dse/cassandra/cassandra.yaml
+sudo sed -i 's/rpc_address:.*$/rpc_address: %s/'       /etc/dse/cassandra/cassandra.yaml
 
 # start DSE
 echo "Starting DataStax Enterprise"
@@ -117,7 +117,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       config2.vm.hostname = server['name']
       server_ip = server['ip']
       config2.vm.network :private_network, ip: server_ip
-      config2.vm.provision :shell, :inline => node_script % server_ip
+      config2.vm.provision :shell, :inline => node_script % [server_ip, server_ip]
 
       config2.vm.provider "vmware_fusion" do |v|
         v.vmx["memsize"]  = CFG_MEMSIZE

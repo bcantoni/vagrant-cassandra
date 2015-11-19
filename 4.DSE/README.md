@@ -7,6 +7,7 @@ This Vagrant template sets up DataStax Enterprise (DSE) on a configurable number
 Notes:
 
 * Depending on how much memory your host system has, you may need to lower the default memory size for each VM. Currently it's set to 3GB for each VM.
+* This Vagrantfile will install the latest production version of DSE
 
 ## Instructions
 
@@ -19,6 +20,7 @@ Assuming you already have Vagrant installed, you can bring up the DSE nodes with
 ```
 $ export VAGRANT_DSE_USERNAME=your-username
 $ export VAGRANT_DSE_PASSWORD=your-password
+$ # optional: adjust DSE_NODES value in Vagrantfile (default 3)
 $ vagrant up
 ```
 
@@ -26,7 +28,7 @@ When the up command is done, you can check the status of the VMs:
 
 ```
 $ vagrant status
-Building 3 DSE node(s)
+Configured for 3 DSE node(s)
 Current machine states:
 
 dse0           running (virtualbox)
@@ -41,15 +43,15 @@ Datacenter: Cassandra
 =====================
 Status=Up/Down
 |/ State=Normal/Leaving/Joining/Moving
---  Address      Load       Tokens  Owns   Host ID                               Rack
-UN  10.10.10.10  157.87 MB  1       56.0%  76dc4bac-eb49-48da-849b-bc26c7ff4522  rack1
-UN  10.10.10.11  126.17 MB  1       13.3%  3d76cf09-5140-47f7-a15c-32f096d467e2  rack1
-UN  10.10.10.12  88.19 MB   1       30.7%  91015c51-8c39-4da7-ac8d-cfe770fe0d85  rack1
+--  Address      Load       Tokens  Owns    Host ID                               Rack
+UN  10.10.10.12  83.1 KB    1       ?       a0376d25-e955-41f0-b098-e8ad30d2c530  rack1
+UN  10.10.10.10  77.35 KB   1       ?       a9720ccb-2871-4b64-b565-18e517820a9b  rack1
+UN  10.10.10.11  61.6 KB    1       ?       27661981-be43-4de8-8b16-3e322e948855  rack1
 ```
 
 ### Configure DSE
 
-The default configuration will join all nodes together into a single cluster (with dse0 as the seed node) and start the services. For reference, see the [DataStax Enterprise 4.6 documentation](http://www.datastax.com/documentation/datastax_enterprise/4.6/datastax_enterprise/deploy/deploySingleDC.html) for all the details on DSE configuration settings.
+The default configuration will join all nodes together into a single cluster (with dse0 as the seed node) and start the services. For reference, see the [DataStax Enterprise documentation](http://docs.datastax.com/en/datastax_enterprise/latest/datastax_enterprise/deploy/deploySingleDC.html) for all the details on DSE configuration settings.
 
 Mac users might find [bcantoni/i2cssh](https://github.com/bcantoni/i2cssh) helpful. It will connect with all Vagrant nodes in parallel iTerm2 shell windows: `i2cssh -v`.
 
