@@ -44,7 +44,7 @@ Here are some quick screencasts which walk through the three different templates
 
 ## Installation
 
-Note: These scripts were created on a Mac OS X 10.9.5 host with Vagrant v1.6.5 and VirtualBox v4.3.20. Everything should work for Linux or Windows hosts as well, but I have not tested it yet. Shell scripts which are meant to run on the host (like up-parallel.sh or down.sh) would need to have Windows equivalents created.
+Note: These scripts were created on a Mac OS X 10.9/10.10 host with Vagrant v1.6/1.7 and VirtualBox v4.3/5.0. Everything should work for Linux or Windows hosts as well, but I have not tested it. Shell scripts which are meant to run on the host (like up-parallel.sh or down.sh) would need to have Windows equivalents created.
 
 1. Edit your local Hosts file to include the private network addresses (this makes it much easier to refer to the VMs by hostname):
 
@@ -78,9 +78,9 @@ Note: These scripts were created on a Mac OS X 10.9.5 host with Vagrant v1.6.5 a
 1. Check that both are installed and reachable from a command line:
 
         $ vagrant --version
-        Vagrant 1.6.5
+        Vagrant 1.7.4
         $ VBoxManage --version
-        4.3.20r96996
+        5.0.8r103449
 
 1. Clone this repository
 
