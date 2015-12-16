@@ -21,6 +21,7 @@ if ENV['DEB_CACHE_HOST']
 apt-get install squid-deb-proxy-client -y
 echo 'Acquire::http::Proxy "#{deb_cache_host}";' | sudo tee /etc/apt/apt.conf.d/30autoproxy
 echo "Acquire::http::Proxy { debian.datastax.com DIRECT; };" | sudo tee -a /etc/apt/apt.conf.d/30autoproxy
+echo "Acquire::http::Proxy { ppa.launchpad.net DIRECT; };" | sudo tee -a /etc/apt/apt.conf.d/30autoproxy
 cat /etc/apt/apt.conf.d/30autoproxy
 CACHE
 end
@@ -36,8 +37,13 @@ dpkg-reconfigure -f noninteractive tzdata
 #{deb_cache_cmds}
 
 # install Java and a few base packages
+add-apt-repository ppa:openjdk-r/ppa
 apt-get update
-apt-get install vim curl zip unzip git python-pip openjdk-7-jdk -y
+apt-get install vim curl zip unzip git python-pip -y -q
+
+# Java install - adjust if needed
+# apt-get install openjdk-7-jdk -y -q
+apt-get install openjdk-8-jdk -y -q
 
 echo "Vagrant provisioning complete"
 SCRIPT
@@ -48,7 +54,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define :cassandra do |x|
-    x.vm.box = "hashicorp/precise64"
+    x.vm.box = "ubuntu/trusty64"
     x.vm.provider "vmware_fusion" do |v|
       v.vmx["memsize"]  = CFG_MEMSIZE
     end
