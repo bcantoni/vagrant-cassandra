@@ -106,7 +106,7 @@ apt-get update
 
 # install Java first, then DataStax Community Edition
 apt-get install openjdk-7-jdk libjna-java -y
-apt-get install vim curl zip unzip git python-pip python-support dsc20 cassandra=2.0.11 datastax-agent -y
+apt-get install vim curl zip unzip git python-pip python-support dsc20=2.0.17-1 cassandra=2.0.17 datastax-agent -y
 
 # stop Cassandra (which automatically starts after install) and clear data files
 echo "Stopping Cassandra..."
