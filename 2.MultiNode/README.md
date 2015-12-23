@@ -92,8 +92,8 @@ total,interval_op_rate,interval_key_rate,latency,95th,99.9th,elapsed_time
 From here, you can learn more about OpsCenter:
 
 * [OpsCenter Tutorial](http://www.datastax.com/resources/tutorials/overview-opscenter) (video)
-* [OpsCenter Documentation](http://www.datastax.com/documentation/opscenter/5.0/opsc/about_c.html)
-* [Using OpsCenter](http://www.datastax.com/documentation/opscenter/4.1/opsc/online_help/opscUsing_g.html)
+* [OpsCenter Documentation](http://docs.datastax.com/en/opscenter/5.2/opsc/about_c.html)
+* [Using OpsCenter](http://docs.datastax.com/en/opscenter/5.2/opsc/online_help/opscUsing_g.html)
 
 
 ### Shut Down

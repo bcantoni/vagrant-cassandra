@@ -80,7 +80,7 @@ apt-get install vim curl zip unzip git python-pip openjdk-7-jdk -y
 #  --ring_name
 #
 # refer to the documentation to see all the unattended options available:
-#  http://www.datastax.com/documentation/datastax_enterprise/4.6/datastax_enterprise/install/installSilent.html
+#  http://docs.datastax.com/en/datastax_enterprise/4.8/datastax_enterprise/install/installSilent.html
 
 chmod +x /vagrant/#{INSTALLER_FILENAME}
 set -x

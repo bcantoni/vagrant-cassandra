@@ -52,7 +52,7 @@ First let's try installing Cassandra from the Tarball. These steps are patterned
         Use HELP for help.
         cqlsh>
 
-1. Try some [CQL](http://www.datastax.com/documentation/cql/3.1/cql/cql_intro_c.html) commands:
+1. Try some [CQL](http://docs.datastax.com/en/cql/3.1/cql/cql_intro_c.html) commands:
 
         CREATE KEYSPACE usertest WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
 
@@ -129,4 +129,4 @@ Now you can play with Cassandra as we did before, using the CQLSH tool. The diff
 
 [gs]: http://wiki.apache.org/cassandra/GettingStarted
 [dl]: http://cassandra.apache.org/download/
-[dsc]: http://www.datastax.com/documentation/cassandra/2.0/cassandra/install/installDeb_t.html
+[dsc]: http://docs.datastax.com/en/cassandra/2.0/cassandra/install/installDeb_t.html
