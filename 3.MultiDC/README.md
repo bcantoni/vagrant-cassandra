@@ -74,7 +74,7 @@ Next, connect to the OpsCenter web interface: <http://node10:8888/> which should
 
 ![OpsCenter Start Screenshot](../2.MultiNode/images/OpsCenterStart.png)
 
-Now we can use OpsCenter to connect with the existing cluster on node[1-6]. Click on Manage Existing Cluster, type in `node11`, then click Save Cluster. (OpsCenter just needs to connect with one node in a cluster, then it will discover the rest.)
+Now we can use OpsCenter to connect with the existing cluster on node11-node16. Click on Manage Existing Cluster, type in `node11`, then click Save Cluster. (OpsCenter just needs to connect with one node in a cluster, then it will discover the rest.)
 
 Once OpsCenter has discovered all of the cluster hosts, it should show the 6-node cluster in two datacenters (DC1, DC2):
 
@@ -108,7 +108,7 @@ To learn more about the configuration performed in this template, see:
 
 ### Cassandra Versions
 
-This template is currently set to install Cassandra 2.0 and the latest current version of OpsCenter. You can adjust the versions if needed in Vagrantfile (packages opscenter, dsc20, and cassandra).
+This template is currently set to install Cassandra 2.0 and the latest current version of OpsCenter. You can adjust the versions if needed in Vagrantfile (packages opscenter, dsc20, and cassandra). (Note: the included cassandra.yaml will likely need changes to be used with Cassandra 2.1 or higher.)
 
 For each major version of Cassandra, there are two packages that must be installed (which will then bring in all dependencies): 'dscNN' (where 'NN' is the major version) and 'cassandra'. It's best to give specific version numbers for each in the install command. As of this writing the latest builds in each Cassandra line are as follows:
 
