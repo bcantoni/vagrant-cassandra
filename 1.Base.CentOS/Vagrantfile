@@ -1,0 +1,47 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrant Cassandra Project
+# https://github.com/bcantoni/vagrant-cassandra
+# Brian Cantoni
+
+# This sample sets up 1 VM ('cassandra') with only Java installed.
+# See the README for a walkthrough explaining Cassandra and DataStax installation.
+
+# Adjustable settings
+CFG_MEMSIZE = "3000"      # max memory for each VM
+CFG_TZ = "US/Pacific"     # timezone, like US/Pacific, US/Eastern, UTC, Europe/Warsaw, etc.
+CFG_IP = "10.211.54.5"    # private IP address
+
+# Provisioning script
+node_script = <<SCRIPT
+#!/bin/bash
+
+# install Java and a few utilities
+yum check-updates
+yum install zip unzip curl -y
+yum install java-1.8.0-openjdk-headless.x86_64 -y
+
+echo "Vagrant provisioning complete"
+SCRIPT
+
+# Configure VM server
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.define :cassandra do |x|
+    # switch between different CentOS boxes
+    x.vm.box = "boxcutter/centos72"
+    #x.vm.box = "boxcutter/centos66"
+    x.vm.provider "vmware_fusion" do |v|
+      v.vmx["memsize"]  = CFG_MEMSIZE
+    end
+    x.vm.provider :virtualbox do |v|
+      v.name = "cassandra-centos"
+      v.customize ["modifyvm", :id, "--memory", CFG_MEMSIZE]
+    end
+    x.vm.network :private_network, ip: CFG_IP
+    x.vm.hostname = "cassandra-centos"
+    x.vm.provision :shell, :inline => node_script
+  end
+end

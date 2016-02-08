@@ -125,6 +125,10 @@ These are the starting templates which go through increasing levels of complexit
 
 This is a base template with only Java pre-installed. It's a good getting started point to explore installing Cassandra and DataStax packages.
 
+### [1. Base CentOS](1.Base.CentOS)
+
+Same as above, but using CentOS instead of Ubuntu.
+
 ### [2. MultiNode](2.MultiNode)
 
 This template creates 4 VMs: one for OpsCenter and 3 for Cassandra nodes. OpsCenter is preinstalled, and you can use that to finish building the cluster.
