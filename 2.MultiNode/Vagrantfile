@@ -7,7 +7,7 @@
 
 # This template sets up 4 VMs:
 #   node0: OpsCenter installed
-#   node0-3: only Java installed
+#   node1-3: only Java installed
 # See the README for a walkthrough explaining the installation process through OpsCenter.
 
 # Adjustable settings
@@ -94,8 +94,9 @@ dpkg-reconfigure -f noninteractive tzdata
 #{deb_cache_cmds}
 
 # install Java and a few base packages
+add-apt-repository ppa:openjdk-r/ppa
 apt-get update
-apt-get install vim curl zip unzip git python-pip openjdk-7-jdk -y
+apt-get install vim curl zip unzip git python-pip openjdk-8-jdk -y
 
 echo "Vagrant provisioning complete"
 SCRIPT
@@ -112,7 +113,7 @@ end
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "hashicorp/precise64"
+  config.vm.box = "ubuntu/trusty64"
   servers.each do |server|
     config.vm.define server['name'] do |config2|
       config2.vm.hostname = server['name']
