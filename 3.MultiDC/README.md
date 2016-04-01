@@ -104,20 +104,20 @@ From here, you can learn more about OpsCenter:
 
 To learn more about the configuration performed in this template, see:
 
-* [Initializing a multiple node cluster (multiple data centers)](http://docs.datastax.com/en/cassandra/2.0/cassandra/initialize/initializeMultipleDS.html)
+* [Initializing a multiple node cluster (multiple data centers)](http://docs.datastax.com/en/cassandra/2.1/cassandra/initialize/initializeMultipleDS.html)
 
 ### Cassandra Versions
 
-This template is currently set to install Cassandra 2.0 and the latest current version of OpsCenter. You can adjust the versions if needed in Vagrantfile (packages opscenter, dsc20, and cassandra). (Note: the included cassandra.yaml will likely need changes to be used with Cassandra 2.1 or higher.)
+This template is currently set to install Cassandra 2.1 and the latest current version of OpsCenter. You can adjust the versions if needed in Vagrantfile (packages opscenter, dsc21, and cassandra). (Note: the included cassandra.yaml will likely need changes to be used with Cassandra 2.2 or higher.)
 
 For each major version of Cassandra, there are two packages that must be installed (which will then bring in all dependencies): 'dscNN' (where 'NN' is the major version) and 'cassandra'. It's best to give specific version numbers for each in the install command. As of this writing the latest builds in each Cassandra line are as follows:
 
 Cassandra | dsc            | cassandra
 ----------|----------------|-------------------
-2.0       | dsc20=2.0.17-1 | cassandra=2.0.17.1 
-2.1       | dsc21=2.0.11-1 | cassandra=2.1.12.1 
-2.2       | dsc22=2.2.4-1  | cassandra=2.2.4-1 
-3.0       | dsc30=3.0.1-1  | cassandra=3.0.1-1 
+2.0       | dsc20=2.0.17-1 | cassandra=2.0.17.1
+2.1       | dsc21=2.0.13-1 | cassandra=2.1.13.1
+2.2       | dsc22=2.2.5-1  | cassandra=2.2.5-1
+3.0       | dsc30=3.0.4-1  | cassandra=3.0.4-1
 
 ### Shut Down
 

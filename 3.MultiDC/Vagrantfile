@@ -106,15 +106,25 @@ apt-get update
 
 # install Java first, then DataStax Community Edition
 apt-get install openjdk-7-jdk libjna-java -y
-apt-get install vim curl zip unzip git python-pip python-support dsc20=2.0.17-1 cassandra=2.0.17 datastax-agent -y
+apt-get install vim curl zip unzip git python-pip python-support dsc21=2.1.13-1 cassandra=2.1.13 datastax-agent -y
 
 # stop Cassandra (which automatically starts after install) and clear data files
 echo "Stopping Cassandra..."
+sleep 10
 service cassandra stop
-rm -rf /var/lib/cassandra/data/system/*
+sleep 10
+rm -rf /var/lib/cassandra/*
 
 # copy datacenter config files and restart Cassandra
-cp /vagrant/cassandra.yaml /etc/cassandra
+IP=`/sbin/ifconfig eth1 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`
+sed -i -e "s/^\s*cluster_name:.*$/cluster_name: 'MultiDC Vagrant'/" /etc/cassandra/cassandra.yaml
+sed -i -e "s/ seeds:.*$/ seeds: 'node11,node12'/" /etc/cassandra/cassandra.yaml
+sed -i -e "s/^listen_address:.*$/listen_address: $IP/" /etc/cassandra/cassandra.yaml
+sed -i -e "s/^.*broadcast_address:.*$/broadcast_address: /" /etc/cassandra/cassandra.yaml
+sed -i -e "s/^rpc_address:.*$/rpc_address: 0.0.0.0/" /etc/cassandra/cassandra.yaml
+sed -i -e "s/^.*broadcast_rpc_address:.*$/broadcast_rpc_address: $IP/" /etc/cassandra/cassandra.yaml
+sed -i -e "s/^endpoint_snitch:.*$/endpoint_snitch: PropertyFileSnitch/" /etc/cassandra/cassandra.yaml
+
 cp /vagrant/cassandra-topology.properties /etc/cassandra
 echo "stomp_interface: 10.211.55.110" | sudo tee -a /var/lib/datastax-agent/conf/address.yaml
 echo "Restarting Cassandra..."
@@ -136,7 +146,7 @@ end
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "hashicorp/precise64"
+  config.vm.box = "ubuntu/trusty64"
   servers.each do |server|
     config.vm.define server['name'] do |config2|
       config2.vm.hostname = server['name']
