@@ -79,14 +79,23 @@ To put some load on the Cassandra cluster (and see the reaction in OpsCenter), t
 
 ```
 $ vagrant ssh node1
-$ cassandra-stress -d node1 -n 200000
+vagrant@node1:~$ cassandra-stress write n=200000 -node node1
 Created keyspaces. Sleeping 1s for propagation.
-total,interval_op_rate,interval_key_rate,latency,95th,99.9th,elapsed_time
-22479,2247,2247,20.2,50.6,329.4,10
-64491,4201,4201,14.2,37.1,87.1,20
-116785,5229,5229,11.9,30.2,87.1,30
-174151,5736,5736,10.8,25.3,86.6,40
-200000,2584,2584,10.7,23.8,57.4,45
+Sleeping 2s...
+Warming up WRITE with 50000 iterations...
+Connected to cluster: Test Cluster
+Datatacenter: Cassandra; Host: node1/10.211.55.101; Rack: rack1
+Datatacenter: Cassandra; Host: /10.211.55.103; Rack: rack1
+Datatacenter: Cassandra; Host: /10.211.55.102; Rack: rack1
+Failed to connect over JMX; not collecting these stats
+Running WRITE with 200 threads for 200000 iteration
+Failed to connect over JMX; not collecting these stats
+type,      total ops,    op/s,    pk/s,   row/s,    mean,     med,     .95,     .99,    .999,     max,   time,   stderr, errors,  gc: #,  max ms,  sum ms,  sdv ms,      mb
+total,         10493,   10493,   10493,   10493,    18.1,    18.7,    36.1,    83.0,    91.0,    94.9,    1.0,  0.00000,      0,      0,       0,       0,       0,       0
+total,         23344,   12287,   12287,   12287,    16.3,    16.6,    35.2,    46.5,    56.3,    66.0,    2.0,  0.05571,      0,      0,       0,       0,       0,       0
+total,         35805,   11591,   11591,   11591,    17.2,    15.5,    40.9,   112.6,   144.7,   151.0,    3.1,  0.04204,      0,      0,       0,       0,       0,       0
+total,         50354,   14282,   14282,   14282,    14.0,    14.9,    28.2,    32.7,    39.2,    56.0,    4.1,  0.05430,      0,      0,       0,       0,       0,       0
+...
 ```
 
 From here, you can learn more about OpsCenter:
