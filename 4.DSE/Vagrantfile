@@ -125,6 +125,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       config2.vm.provider :virtualbox do |v|
         v.name = server['name']
         v.customize ["modifyvm", :id, "--memory", CFG_MEMSIZE]
+        v.customize ["modifyvm", :id, "--cpus"  , "2"   ]
       end
 
     end
