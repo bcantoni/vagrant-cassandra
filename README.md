@@ -1,6 +1,6 @@
 # Vagrant Cassandra
 
-This project contains templates for learning how to install and configure Apache Cassandra or DataStax Enterprise (DSE) on a local dev machine. It uses [Vagrant](http://www.vagrantup.com/) to configure and run virtual machines (VMs) running in [VirtualBox](https://www.virtualbox.org/). Vagrant enables quickly building environments in a way that is repeatable and isolated from your host system. This makes it perfect for experimenting with different configurations of Cassandra and DSE.
+This project contains templates for learning how to install and configure [Apache Cassandra](https://cassandra.apache.org/) or [DataStax Enterprise](https://www.datastax.com/products/datastax-enterprise) (DSE) on a local dev machine. It uses [Vagrant](http://www.vagrantup.com/) to configure and run virtual machines (VMs) running in [VirtualBox](https://www.virtualbox.org/). Vagrant enables quickly building environments in a way that is repeatable and isolated from your host system. This makes it perfect for experimenting with different configurations of Cassandra and DSE.
 
 Why create yet another Cassandra on Vagrant system? Many scripts and Vagrant projects are already fully assembled and configured. Instead, I like to learn from the ground up so I can better understand each step. In the templates below I've also tried to minimize external dependencies, and the number of tools which need to be installed. (For example, I don't use Chef or Puppet here.)
 
