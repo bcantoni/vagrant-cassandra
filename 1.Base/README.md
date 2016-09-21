@@ -1,6 +1,6 @@
 ## 1.Base Template
 
-This is a base Vagrant template that starts with only Java pre-installed. Follow the instructions below to try a couple different ways of installing Cassandra and DataStax.
+This is a base Vagrant template that starts with only Java pre-installed. Follow the instructions below to try a couple different ways of installing Apache Cassandra and DataStax Enterprise.
 
 ## Instructions
 
@@ -26,7 +26,7 @@ OpenJDK 64-Bit Server VM (build 24.51-b03, mixed mode)
 
 ### Cassandra (Tarball)
 
-First let's try installing Cassandra from the Tarball. These steps are patterned after the Cassandra [Getting Started][gs] page.
+First let's try installing Apache Cassandra from the tarball. These steps are patterned after the Cassandra [Getting Started][gs] page.
 
 1. From the [Cassandra project site][dl] find the current release tarball (as of this writing, it's `apache-cassandra-2.0.8-bin.tar.gz`)
 1. Click the link to find a suitable mirror link and copy it
@@ -127,6 +127,6 @@ Next we'll try installing the [DataStax Community Edition][dsc] using the Ubuntu
 
 Now you can play with Cassandra as we did before, using the CQLSH tool. The difference here is the install method (Ubuntu package versus tarball), and the result is Cassandra running as a service automatically.
 
-[gs]: http://wiki.apache.org/cassandra/GettingStarted
-[dl]: http://cassandra.apache.org/download/
-[dsc]: http://docs.datastax.com/en/cassandra/2.0/cassandra/install/installDeb_t.html
+[gs]: https://cassandra.apache.org/doc/latest/getting_started/index.html
+[dl]: https://cassandra.apache.org/download/
+[dsc]: https://docs.datastax.com/en/cassandra/2.0/cassandra/install/installDeb_t.html

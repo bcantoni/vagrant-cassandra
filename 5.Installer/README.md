@@ -13,9 +13,9 @@ Notes:
 
 ### Setup
 
-To use DSE you will need to register at [DataStax](http://www.datastax.com/download). This process will give you a username and password which enable free use of DSE in development environments.
+To use DSE you will need to register at [DataStax](https://www.datastax.com/download). This process will give you a username and password which enable free use of DSE in development environments.
 
-Next you will need to download the installer (Install Package for Linux) from the [DataStax download page](http://www.datastax.com/download). Save it in the `vagrant-cassandra/5.Installer` directory. The downloaded file should be named something like `DataStaxEnterprise-4.8.1.2015102316-linux-x64-installer.run` for DSE 4.8. (For older or newer versions, modify the INSTALLER_FILENAME setting in Vagrantfile.)
+Next you will need to download the installer (Install Package for Linux) from the [DataStax download page](https://www.datastax.com/download). Save it in the `vagrant-cassandra/5.Installer` directory. The downloaded file should be named something like `DataStaxEnterprise-4.8.1.2015102316-linux-x64-installer.run` for DSE 4.8. (For older or newer versions, modify the INSTALLER_FILENAME setting in Vagrantfile.)
 
 If you want to script the installer download step, you can use wget like:
 
@@ -88,12 +88,12 @@ Installer options can also be defined in a properties file which is then passed 
 
 Refer to these documentation pages for more details on the available options:
 
-* [Unattended DataStax Enterprise installer documentation](http://docs.datastax.com/en/datastax_enterprise/4.8/datastax_enterprise/install/installSilent.html)
-* [DataStax Enterprise 4.8 documentation](http://docs.datastax.com/en/datastax_enterprise/4.8/datastax_enterprise/deploy/deploySingleDC.html)
+* [Unattended DataStax Enterprise installer documentation](https://docs.datastax.com/en/datastax_enterprise/4.8/datastax_enterprise/install/installSilent.html)
+* [DataStax Enterprise 4.8 documentation](https://docs.datastax.com/en/datastax_enterprise/4.8/datastax_enterprise/deploy/deploySingleDC.html)
 
 ### Unattended Uninstall
 
-The DSE installer also has a corresponding uninstaller. Refer to the [unattended uninstaller documentation](http://docs.datastax.com/en/datastax_enterprise/4.8/datastax_enterprise/install/installremove.html) for more details.
+The DSE installer also has a corresponding uninstaller. Refer to the [unattended uninstaller documentation](https://docs.datastax.com/en/datastax_enterprise/4.8/datastax_enterprise/install/installremove.html) for more details.
 
 To try this on a node, follow this example which will not drain the node (do_drain=0), but will remove all Cassandra data along with the services (full_uninstall=1):
 

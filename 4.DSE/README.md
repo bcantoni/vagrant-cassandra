@@ -13,7 +13,7 @@ Notes:
 
 ### Setup
 
-To use DSE you will need to register at [DataStax](http://www.datastax.com/download). This process will give you a username and password which enable free use of DSE in development environments.
+To use DSE you will need to register at [DataStax](https://www.datastax.com/download). This process will give you a username and password which enable free use of DSE in development environments.
 
 Assuming you already have Vagrant installed, you can bring up the DSE nodes with the following:
 
@@ -51,7 +51,7 @@ UN  10.10.10.11  61.6 KB    1       ?       27661981-be43-4de8-8b16-3e322e948855
 
 ### Configure DSE
 
-The default configuration will join all nodes together into a single cluster (with dse0 as the seed node) and start the services. For reference, see the [DataStax Enterprise documentation](http://docs.datastax.com/en/datastax_enterprise/latest/datastax_enterprise/deploy/deploySingleDC.html) for all the details on DSE configuration settings.
+The default configuration will join all nodes together into a single cluster (with dse0 as the seed node) and start the services. For reference, see the [DataStax Enterprise documentation](https://docs.datastax.com/en/latest-dse/datastax_enterprise/production/initDSETOC.html) for all the details on DSE configuration settings.
 
 Mac users might find [bcantoni/i2cssh](https://github.com/bcantoni/i2cssh) helpful. It will connect with all Vagrant nodes in parallel iTerm2 shell windows: `i2cssh -v`.
 

@@ -1,6 +1,6 @@
 ## 3.MultiDC Template
 
-This Vagrant template sets up 7 separate VMs for creating a multi-datacenter Cassandra cluster:
+This Vagrant template sets up 7 separate VMs for creating a multi-datacenter Apache Cassandra cluster:
 
 * node10 - [OpsCenter](http://www.datastax.com/what-we-offer/products-services/datastax-opscenter) host
 * node[11-16] - [Cassandra](http://planetcassandra.org/cassandra/) nodes
@@ -98,17 +98,17 @@ total,interval_op_rate,interval_key_rate,latency,95th,99.9th,elapsed_time
 
 From here, you can learn more about OpsCenter:
 
-* [OpsCenter Tutorial](http://www.datastax.com/resources/tutorials/overview-opscenter) (video)
-* [OpsCenter Documentation](http://docs.datastax.com/en/opscenter/5.2/opsc/about_c.html)
-* [Using OpsCenter](http://docs.datastax.com/en/opscenter/5.2/opsc/online_help/opscUsing_g.html)
+* [OpsCenter Tutorial](https://www.datastax.com/resources/tutorials/overview-opscenter) (video)
+* [OpsCenter Documentation](https://docs.datastax.com/en/opscenter/5.2/opsc/about_c.html)
+* [Using OpsCenter](https://docs.datastax.com/en/opscenter/5.2/opsc/online_help/opscUsing_g.html)
 
 To learn more about the configuration performed in this template, see:
 
-* [Initializing a multiple node cluster (multiple data centers)](http://docs.datastax.com/en/cassandra/2.1/cassandra/initialize/initializeMultipleDS.html)
+* [Initializing a multiple node cluster (multiple data centers)](https://docs.datastax.com/en/cassandra/2.1/cassandra/initialize/initializeMultipleDS.html)
 
 ### Cassandra Versions
 
-This template is currently set to install Cassandra 2.1 and the latest current version of OpsCenter. You can adjust the versions if needed in Vagrantfile (packages opscenter, dsc21, and cassandra). (Note: the included cassandra.yaml will likely need changes to be used with Cassandra 2.2 or higher.)
+This template is currently set to install Apache Cassandra 2.1 and the latest community version of OpsCenter. You can adjust the versions if needed in Vagrantfile (packages opscenter, dsc21, and cassandra). (Note: the included cassandra.yaml will likely need changes to be used with Cassandra 2.2 or higher.)
 
 For each major version of Cassandra, there are two packages that must be installed (which will then bring in all dependencies): 'dscNN' (where 'NN' is the major version) and 'cassandra'. It's best to give specific version numbers for each in the install command. As of this writing the latest builds in each Cassandra line are as follows:
 

@@ -1,6 +1,6 @@
 ## 2.MultiNode Template
 
-This Vagrant template sets up 4 separate VMs for creating a Cassandra cluster:
+This Vagrant template sets up 4 separate VMs for creating an Apache Cassandra cluster:
 
 * node0 - [OpsCenter](http://www.datastax.com/what-we-offer/products-services/datastax-opscenter) host
 * node[1-3] - base system (only Java pre-installed)
@@ -100,9 +100,9 @@ total,         50354,   14282,   14282,   14282,    14.0,    14.9,    28.2,    3
 
 From here, you can learn more about OpsCenter:
 
-* [OpsCenter Tutorial](http://www.datastax.com/resources/tutorials/overview-opscenter) (video)
-* [OpsCenter Documentation](http://docs.datastax.com/en/opscenter/5.2/opsc/about_c.html)
-* [Using OpsCenter](http://docs.datastax.com/en/opscenter/5.2/opsc/online_help/opscUsing_g.html)
+* [OpsCenter Tutorial](https://www.datastax.com/resources/tutorials/overview-opscenter) (video)
+* [OpsCenter Documentation](https://docs.datastax.com/en/opscenter/5.2/opsc/about_c.html)
+* [Using OpsCenter](https://docs.datastax.com/en/opscenter/5.2/opsc/online_help/opscUsing_g.html)
 
 
 ### Shut Down

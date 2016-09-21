@@ -1,6 +1,6 @@
 # Vagrant Cassandra
 
-This project contains templates for learning how to install and configure Cassandra/DataStax on a local dev machine. It uses [Vagrant](http://www.vagrantup.com/) to configure and run virtual machines (VMs) running in [VirtualBox](https://www.virtualbox.org/). Vagrant enables quickly building environments in a way that is repeatable and isolated from your host system. This makes it perfect for experimenting with different configurations of Cassandra/DataStax.
+This project contains templates for learning how to install and configure Apache Cassandra or DataStax Enterprise (DSE) on a local dev machine. It uses [Vagrant](http://www.vagrantup.com/) to configure and run virtual machines (VMs) running in [VirtualBox](https://www.virtualbox.org/). Vagrant enables quickly building environments in a way that is repeatable and isolated from your host system. This makes it perfect for experimenting with different configurations of Cassandra and DSE.
 
 Why create yet another Cassandra on Vagrant system? Many scripts and Vagrant projects are already fully assembled and configured. Instead, I like to learn from the ground up so I can better understand each step. In the templates below I've also tried to minimize external dependencies, and the number of tools which need to be installed. (For example, I don't use Chef or Puppet here.)
 
@@ -20,15 +20,6 @@ Posts from my blog related to this project:
 * [Using Vagrant for Local Cassandra Development](http://www.cantoni.org/2014/08/26/vagrant-cassandra)
 * [DataStax Installer with Vagrant](http://www.cantoni.org/2015/01/05/datastax-installer-vagrant)
 
-## Cassandra vs DataStax
-
-In this project I tend to use the terms "Cassandra" and "DataStax" interchangeably. Here's the distinction:
-
-* [Cassandra](http://cassandra.apache.org/) is the Apache open source database project. Their releases include binary .tar and packages for Debian
-* [DataStax](http://datastax.com/) provides the Cassandra database combined with other tools in two flavors:
-    * [DataStax Community](http://planetcassandra.org/cassandra/) - includes Cassandra, OpsCenter, demos, and installers for Linux, Windows, and Mac. This is free for everyone to use.
-    * [DataStax Enterprise](http://www.datastax.com/what-we-offer/products-services/datastax-enterprise) - a commercial integrated product which includes Analytics (Hadoop) and Search (Solr) modules, on top of the basic Community edition. This build can be run for free in development (after registration). Using in production requires a paid license agreement which would then include support, training, and so on.
-
 ## Screencasts
 
 Here are some quick screencasts which walk through the three different templates in this project:
@@ -44,7 +35,7 @@ Here are some quick screencasts which walk through the three different templates
 
 ## Installation
 
-Note: These scripts were created on a Mac OS X 10.9/10.10 host with Vagrant v1.6/1.7 and VirtualBox v4.3/5.0. Everything should work for Linux or Windows hosts as well, but I have not tested it. Shell scripts which are meant to run on the host (like up-parallel.sh or down.sh) would need to have Windows equivalents created.
+Note: These scripts were created on a Mac OS X 10.9/10.10/10.11 host with Vagrant v1.6/1.7 and VirtualBox v4.3/5.0. Everything should work for Linux or Windows hosts as well, but I have not tested those platforms. Shell scripts which are meant to run on the host (like up-parallel.sh or down.sh) would need to have Windows equivalents created.
 
 1. Edit your local Hosts file to include the private network addresses (this makes it much easier to refer to the VMs by hostname):
 
@@ -151,7 +142,7 @@ This template is structurally the same as 4.DSE, but instead uses the Standalone
 
 # License
 
-Copyright 2014-15 Brian Cantoni
+Copyright 2014-16 Brian Cantoni
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -164,4 +155,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
