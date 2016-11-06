@@ -45,6 +45,7 @@ if ENV['DEB_CACHE_HOST']
 apt-get install squid-deb-proxy-client -y
 echo 'Acquire::http::Proxy "#{deb_cache_host}";' | sudo tee /etc/apt/apt.conf.d/30autoproxy
 echo "Acquire::http::Proxy { debian.datastax.com DIRECT; };" | sudo tee -a /etc/apt/apt.conf.d/30autoproxy
+echo "Acquire::http::Proxy { ppa.launchpad.net DIRECT; };" | sudo tee -a /etc/apt/apt.conf.d/30autoproxy
 cat /etc/apt/apt.conf.d/30autoproxy
 CACHE
 end
@@ -78,13 +79,14 @@ dpkg-reconfigure -f noninteractive tzdata
 
 #{deb_cache_cmds}
 
-# configure DataStax repository
+# configure repositories
+add-apt-repository ppa:openjdk-r/ppa
 echo "deb http://#{dse_username}:#{dse_password}@debian.datastax.com/enterprise stable main" | sudo tee -a /etc/apt/sources.list.d/datastax.sources.list
 wget -q -O - http://debian.datastax.com/debian/repo_key | sudo apt-key add -
 apt-get update
 
 # install DSE, Java, and a few base packages
-apt-get install vim curl zip unzip git python-pip openjdk-7-jdk dse-full -y
+apt-get install vim curl zip unzip git python-pip openjdk-8-jdk dse-full -y
 
 # configure DSE
 echo "Configuring DataStax Enterprise"
@@ -111,7 +113,7 @@ end
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "hashicorp/precise64"
+  config.vm.box = "ubuntu/trusty64"
   servers.each do |server|
     config.vm.define server['name'] do |config2|
       config2.vm.hostname = server['name']
