@@ -138,7 +138,7 @@ This template is structurally the same as 4.DSE, but instead uses the Standalone
 
 ## Notes
 
-* All templates are currently based off the `hashicorp/precise64` box which is running 64-bit Ubuntu 12.04 LTS. You can change the `vm.box` value if you want to try different guest operating system versions (e.g. use `ubuntu/trusty64` for Ubuntu 14.04).
+* Most templates are currently based off the `ubuntu/trusty64` box which is running 64-bit Ubuntu 14.04 LTS. You can change the `vm.box` value if you want to try different guest operating systems.
 
 # License
 
