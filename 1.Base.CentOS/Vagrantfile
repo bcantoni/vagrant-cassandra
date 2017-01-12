@@ -39,7 +39,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     x.vm.provider :virtualbox do |v|
       v.name = "cassandra-centos"
       v.customize ["modifyvm", :id, "--memory", CFG_MEMSIZE]
-      v.customize ["modifyvm", :id, "--cpus"  , "2"   ]
+      v.customize ["modifyvm", :id, "--cpus"  , "2" ]
+      v.customize ["modifyvm", :id, "--cableconnected1", "on"]
     end
     x.vm.network :private_network, ip: CFG_IP
     x.vm.hostname = "cassandra-centos"
