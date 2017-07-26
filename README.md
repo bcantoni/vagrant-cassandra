@@ -65,7 +65,7 @@ Note: These scripts were created on a Mac OS X 10.9/10.10/10.11 host with Vagran
 
    Alternatively, try the [vagrant-hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater) plugin which should do the same thing automatically. (I have not tried it.)
 1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-1. Install [Vagrant](https://www.vagrantup.com/downloads)
+1. Install [Vagrant](https://www.vagrantup.com/downloads.html)
 1. Check that both are installed and reachable from a command line:
 
         $ vagrant --version
@@ -142,7 +142,7 @@ This template is structurally the same as 4.DSE, but instead uses the Standalone
 
 # License
 
-Copyright 2014-16 Brian Cantoni
+Copyright 2014-17 Brian Cantoni
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
