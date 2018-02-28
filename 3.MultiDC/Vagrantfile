@@ -7,7 +7,7 @@
 
 # This template sets up 7 VMs:
 #   node10: OpsCenter installed
-#   node11-16: only Java installed
+#   node11-16: Java plus Apache Cassandra installed
 # See the README for a walkthrough explaining Cassandra and DataStax installation.
 
 # Adjustable settings
@@ -24,7 +24,6 @@ if ENV['DEB_CACHE_HOST']
   deb_cache_cmds = <<CACHE
 apt-get install squid-deb-proxy-client -y
 echo 'Acquire::http::Proxy "#{deb_cache_host}";' | sudo tee /etc/apt/apt.conf.d/30autoproxy
-echo "Acquire::http::Proxy { debian.datastax.com DIRECT; };" | sudo tee -a /etc/apt/apt.conf.d/30autoproxy
 cat /etc/apt/apt.conf.d/30autoproxy
 CACHE
 end
@@ -57,7 +56,7 @@ dpkg-reconfigure -f noninteractive tzdata
 
 #{deb_cache_cmds}
 
-# add DataStax repo for APT
+# add DataStax Community repo
 echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/datastax.community.list
 wget -q -O - http://debian.datastax.com/debian/repo_key | sudo apt-key add -
 apt-get update
@@ -99,14 +98,14 @@ dpkg-reconfigure -f noninteractive tzdata
 
 #{deb_cache_cmds}
 
-# configure DataStax repo
-echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
-wget -q -O - http://debian.datastax.com/debian/repo_key | sudo apt-key add -
+# configure Apache Cassandra repo
+echo "deb http://www.apache.org/dist/cassandra/debian 21x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+wget -q -O - https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
 apt-get update
 
-# install Java first, then DataStax Community Edition
+# install Java first, then Apache Cassandra
 apt-get install openjdk-7-jdk libjna-java -y
-apt-get install vim curl zip unzip git python-pip python-support dsc21=2.1.13-1 cassandra=2.1.13 datastax-agent -y
+apt-get install vim curl zip unzip git python-pip python-support cassandra -y
 
 # stop Cassandra (which automatically starts after install) and clear data files
 echo "Stopping Cassandra..."
@@ -126,10 +125,16 @@ sed -i -e "s/^.*broadcast_rpc_address:.*$/broadcast_rpc_address: $IP/" /etc/cass
 sed -i -e "s/^endpoint_snitch:.*$/endpoint_snitch: PropertyFileSnitch/" /etc/cassandra/cassandra.yaml
 
 cp /vagrant/cassandra-topology.properties /etc/cassandra
-echo "stomp_interface: 10.211.55.110" | sudo tee -a /var/lib/datastax-agent/conf/address.yaml
 echo "Restarting Cassandra..."
 service cassandra start
-service datastax-agent restart
+
+# download and configure datastax-agent to connect to OpsCenter node
+echo "Setting up OpsCenter agent..."
+wget -q https://downloads.datastax.com/community/datastax-agent-5.2.5.tar.gz
+tar xvzf datastax-agent-*
+cd datastax-agent-*
+echo "stomp_interface: 10.211.55.110" >> ./conf/address.yaml
+bin/datastax-agent
 
 echo "Vagrant provisioning complete"
 SCRIPT

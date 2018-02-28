@@ -3,7 +3,7 @@
 This Vagrant template sets up 7 separate VMs for creating a multi-datacenter Apache Cassandra cluster:
 
 * node10 - [OpsCenter](http://www.datastax.com/what-we-offer/products-services/datastax-opscenter) host
-* node[11-16] - [Cassandra](http://planetcassandra.org/cassandra/) nodes
+* node[11-16] - [Cassandra](https://cassandra.apache.org/) nodes
 
 The Vagrantfile in this example creates the VMs, installs OpsCenter and Cassandra, then configures the 6-node cluster into two different logical datacenters (DC1 and DC2).
 
@@ -108,16 +108,19 @@ To learn more about the configuration performed in this template, see:
 
 ### Cassandra Versions
 
-This template is currently set to install Apache Cassandra 2.1 and the latest community version of OpsCenter. You can adjust the versions if needed in Vagrantfile (packages opscenter, dsc21, and cassandra). (Note: the included cassandra.yaml will likely need changes to be used with Cassandra 2.2 or higher.)
+This template is currently set to install the latest Apache Cassandra 2.1.x and the latest community version of OpsCenter (5.2.5). You can adjust the Cassandra version if needed in the Vagrantfile by adjusting the repo as follows:
 
-For each major version of Cassandra, there are two packages that must be installed (which will then bring in all dependencies): 'dscNN' (where 'NN' is the major version) and 'cassandra'. It's best to give specific version numbers for each in the install command. As of this writing the latest builds in each Cassandra line are as follows:
+Cassandra | Debian Repo
+----------|-------------
+2.0       | 20x
+2.1       | 21x
+2.2       | 22x
+3.0       | 30x
 
-Cassandra | dsc            | cassandra
-----------|----------------|-------------------
-2.0       | dsc20=2.0.17-1 | cassandra=2.0.17.1
-2.1       | dsc21=2.0.13-1 | cassandra=2.1.13.1
-2.2       | dsc22=2.2.5-1  | cassandra=2.2.5-1
-3.0       | dsc30=3.0.4-1  | cassandra=3.0.4-1
+Notes:
+* The cassandra.yaml edits used here may need to be adjusted for Cassandra 2.2 or higher
+* You may need to install a newer Java version with newer Cassandra versions
+* Starting with OpsCenter 6.0, [OpsCenter only works with DataStax Enterprise](https://docs.datastax.com/en/opscenter/6.0/opsc/opscPolicyChanges.html). To stick with open source Apache Cassandra (as in this demo), keep using OpsCenter 5.2.x.
 
 ### Shut Down
 
