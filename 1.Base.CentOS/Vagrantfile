@@ -19,7 +19,7 @@ node_script = <<SCRIPT
 
 # install Java and a few utilities
 yum check-updates
-yum install zip unzip curl -y
+yum install zip unzip curl tree -y
 yum install java-1.8.0-openjdk-headless.x86_64 -y
 
 echo "Vagrant provisioning complete"
@@ -31,8 +31,8 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define :cassandra do |x|
     # switch between different CentOS boxes
-    x.vm.box = "boxcutter/centos72"
-    #x.vm.box = "boxcutter/centos66"
+    #x.vm.box = "centos/6"
+    x.vm.box = "centos/7"
     x.vm.provider "vmware_fusion" do |v|
       v.vmx["memsize"]  = CFG_MEMSIZE
     end
