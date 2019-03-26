@@ -19,29 +19,22 @@ When the up command is done, login to the VM and confirm that Java is installed:
 ```
 $ vagrant ssh
 vagrant@base:~$ java -version
-java version "1.7.0_55"
-OpenJDK Runtime Environment (IcedTea 2.4.7) (7u55-2.4.7-1ubuntu1~0.12.04.2)
-OpenJDK 64-Bit Server VM (build 24.51-b03, mixed mode)
+openjdk version "1.8.0_171"
+OpenJDK Runtime Environment (build 1.8.0_171-8u171-b11-2~14.04-b11)
+OpenJDK 64-Bit Server VM (build 25.171-b11, mixed mode)
 ```
 
 ### Cassandra (Tarball)
 
 First let's try installing Apache Cassandra from the tarball. These steps are patterned after the Cassandra [Getting Started][gs] page.
 
-1. From the [Cassandra project site][dl] find the current release tarball (as of this writing, it's `apache-cassandra-2.0.8-bin.tar.gz`)
+1. From the [Cassandra project site][dl] find the current 2.x release tarball (as of this writing, it's `apache-cassandra-2.2.14-bin.tar.gz`)
 1. Click the link to find a suitable mirror link and copy it
 1. From inside the VM, download and expand:
 
-        $ wget http://apache.mirrors.pair.com/cassandra/2.0.8/apache-cassandra-2.0.8-bin.tar.gz
-        $ tar xvzf apache-cassandra-2.0.8-bin.tar.gz
-        $ cd apache-cassandra-2.0.8
-
-1. Next create the data and log directories for Cassandra
-
-        $ sudo mkdir /var/lib/cassandra
-        $ sudo mkdir /var/log/cassandra
-        $ sudo chown -R $USER:$GROUP /var/lib/cassandra
-        $ sudo chown -R $USER:$GROUP /var/log/cassandra
+        $ wget http://apache.mirrors.pair.com/cassandra/2.2.14/apache-cassandra-2.2.14-bin.tar.gz
+        $ tar xvzf apache-cassandra-*-bin.tar.gz
+        $ cd apache-cassandra-*
 
 1. Now we'll start Cassandra (as a background process) and make sure it's running with `cqlsh`, the interactive CQL shell:
 
@@ -52,7 +45,7 @@ First let's try installing Apache Cassandra from the tarball. These steps are pa
         Use HELP for help.
         cqlsh>
 
-1. Try some [CQL](http://docs.datastax.com/en/cql/3.1/cql/cql_intro_c.html) commands:
+1. Try some [CQL](http://cassandra.apache.org/doc/latest/cql/) commands:
 
         CREATE KEYSPACE usertest WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
 
@@ -76,7 +69,7 @@ To exercise and play further with Cassandra, go through the [Getting Started][gs
 
     $ cqlsh
     Connected to Test Cluster at localhost:9160.
-    [cqlsh 4.1.1 | Cassandra 2.0.8.39 | CQL spec 3.1.1 | Thrift protocol 19.39.0]
+    [cqlsh 5.0.1 | Cassandra 2.2.14 | CQL spec 3.3.1 | Native protocol v4]
     Use HELP for help.
     cqlsh> COPY usertest.users (user_id, email, lname, fname) FROM '/vagrant/sample_users.csv' WITH HEADER = true;
     100 rows imported in 0.173 seconds.
@@ -94,32 +87,26 @@ To clean up from this step, stop Cassandra and remove the data directories:
     $ sudo rm -rf /var/lib/cassandra
     $ sudm rm -rf /var/log/cassandra
 
-### DataStax Community Edition (Ubuntu Package)
+### DataStax Distribution of Apache Cassandra
 
-Next we'll try installing the [DataStax Community Edition][dsc] using the Ubuntu packages.
+Next we'll try installing the [DataStax Distribution of Apache Cassandra][ddac] using the tarball.
 
-1. The first step is to add the DataStax repo to the sources list for APT:
+1. From the [DataStax Academy downloads page][dsa] find and download the current release tarball (as of this writing, it's `ddac-5.1.13-bin.tar.gz`)
+1. Move the ddac tarball into the 1.Base directory
+1. From inside the VM, download and expand:
 
-        $ echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
-        $ curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
-        $ sudo apt-get update
+        $ tar xvzf /vagrant/ddac-*-bin.tar.gz
+        $ cd ddac-*
 
-1. Next, install the DataStax build:
+1. Next create the data and log directories for Cassandra
 
-        $ sudo apt-get install dsc20
+        $ sudo mkdir /var/{lib,log}/cassandra
+        $ sudo chown -R $USER:$GROUP /var/{lib,log}/cassandra
 
-1. When the installation is complete, Cassandra should be installed and running as a service.
+1. Now we'll start Cassandra (as a background process) and make sure it's running with `cqlsh`, the interactive CQL shell:
 
-        $ sudo service cassandra status
-         * Cassandra is running
-        $ nodetool status
-        Datacenter: datacenter1
-        =======================
-        Status=Up/Down
-        |/ State=Normal/Leaving/Joining/Moving
-        --  Address    Load       Tokens  Owns (effective)  Host ID                               Rack
-        UN  127.0.0.1  40.94 KB   256     100.0%            e3c5a74b-b29c-4084-9621-50c169c75cb7  rack1
-        vagrant@base:~$ cqlsh
+        $ bin/cassandra
+        $ bin/cqlsh
         Connected to Test Cluster at localhost:9160.
         [cqlsh 4.1.1 | Cassandra 2.0.8 | CQL spec 3.1.1 | Thrift protocol 19.39.0]
         Use HELP for help.
@@ -129,4 +116,5 @@ Now you can play with Cassandra as we did before, using the CQLSH tool. The diff
 
 [gs]: https://cassandra.apache.org/doc/latest/getting_started/index.html
 [dl]: https://cassandra.apache.org/download/
-[dsc]: https://docs.datastax.com/en/cassandra/2.0/cassandra/install/installDeb_t.html
+[ddac]: https://www.datastax.com/products/datastax-distribution-of-apache-cassandra
+[dsa]: https://academy.datastax.com/downloads
