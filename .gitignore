@@ -1,5 +1,7 @@
+.DS_Store
 .vagrant
 *.out.txt
 *.run
 *.tar.gz
 *.vdi
+*.loog
