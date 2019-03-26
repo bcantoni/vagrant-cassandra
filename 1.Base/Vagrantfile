@@ -39,7 +39,7 @@ dpkg-reconfigure -f noninteractive tzdata
 # install Java and a few base packages
 add-apt-repository ppa:openjdk-r/ppa
 apt-get update
-apt-get install vim curl zip unzip git python-pip -y -q
+apt-get install vim curl zip unzip git tree python-pip -y -q
 
 # Java install - adjust if needed
 # apt-get install openjdk-7-jdk -y -q
@@ -54,7 +54,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define :cassandra do |x|
-    x.vm.box = "ubuntu/trusty64"
+    x.vm.box = "ubuntu/xenial64"
     x.vm.provider "vmware_fusion" do |v|
       v.vmx["memsize"]  = CFG_MEMSIZE
     end
