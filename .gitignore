@@ -1,3 +1,5 @@
 .vagrant
 *.out.txt
 *.run
+*.tar.gz
+*.vdi
