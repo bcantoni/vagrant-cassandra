@@ -91,7 +91,7 @@ To clean up from this step, stop Cassandra and remove the data directories:
 
 Next we'll try installing the [DataStax Distribution of Apache Cassandra][ddac] using the tarball.
 
-1. From the [DataStax Academy downloads page][dsa] find and download the current release tarball (as of this writing, it's `ddac-5.1.13-bin.tar.gz`)
+1. From the [DataStax downloads page][downloads] find and download the current release tarball (as of this writing, it's `ddac-5.1.15-bin.tar.gz`)
 1. Move the ddac tarball into the 1.Base directory
 1. From inside the VM, download and expand:
 
@@ -107,14 +107,17 @@ Next we'll try installing the [DataStax Distribution of Apache Cassandra][ddac] 
 
         $ bin/cassandra
         $ bin/cqlsh
-        Connected to Test Cluster at localhost:9160.
-        [cqlsh 4.1.1 | Cassandra 2.0.8 | CQL spec 3.1.1 | Thrift protocol 19.39.0]
+        Connected to Test Cluster at 127.0.0.1:9042.
+        [cqlsh 5.0.1 | Cassandra 3.11.3.5115 | CQL spec 3.4.4 | Native protocol v4]
         Use HELP for help.
         cqlsh>
 
-Now you can play with Cassandra as we did before, using the CQLSH tool. The difference here is the install method (Ubuntu package versus tarball), and the result is Cassandra running as a service automatically.
+Now you can play with Cassandra as we did before, using the CQLSH tool.
+
+See also the example [6.DDAC](../6.DDAC/README.md) which is a full automatic multinode install of DDAC.
+
 
 [gs]: https://cassandra.apache.org/doc/latest/getting_started/index.html
 [dl]: https://cassandra.apache.org/download/
 [ddac]: https://www.datastax.com/products/datastax-distribution-of-apache-cassandra
-[dsa]: https://academy.datastax.com/downloads
+[downloads]: https://downloads.datastax.com/#ddac
