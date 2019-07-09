@@ -1,0 +1,103 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrant Cassandra Project
+# https://github.com/bcantoni/vagrant-cassandra
+# Brian Cantoni
+
+# This template sets up a multi-node cluster running DataStax Distribution of Apache
+# Cassandra (DDAC). Adjust NODES variable below to change the number of nodes.
+
+# Adjustable settings
+CFG_MEMSIZE = "3000"    # max memory for each VM
+CFG_TZ = "US/Pacific"   # timezone, like US/Pacific, US/Eastern, UTC, Europe/Warsaw, etc.
+NETWORK = '10.211.55.'   # base IP for DSE nodes
+FIRST_IP = 100
+
+# number of nodes to create
+NODES = 3
+
+# Provisioning script for DDAC nodes (node10, node11, ...)
+# todo: better dynamic generation of /etc/hosts list
+node_script = <<SCRIPT
+#!/bin/bash
+cat > /etc/hosts <<EOF
+127.0.0.1       localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+10.211.55.100   node0
+10.211.55.101   node1
+10.211.55.102   node2
+10.211.55.103   node3
+EOF
+
+# set timezone
+echo "#{CFG_TZ}" > /etc/timezone    
+dpkg-reconfigure -f noninteractive tzdata
+
+# configure repositories
+add-apt-repository ppa:openjdk-r/ppa
+apt-get update
+
+# install Java and a few base packages
+apt-get install --no-install-recommends vim curl zip unzip git python-pip openjdk-8-jre-headless -y
+
+# install (untar) DDAC
+tar xvzf /vagrant/ddac-bin.tar.gz
+chown -R vagrant:vagrant /home/vagrant/ddac-*
+echo "PATH=$(realpath ddac-*/bin)"':$PATH' >> /home/vagrant/.profile
+
+# configure DDAC
+echo "Configuring DDAC"
+mkdir /var/{log,lib}/cassandra
+chown -R vagrant:vagrant /var/{log,lib}/cassandra
+cd ddac-*
+sed -i 's/- seeds:.*$/- seeds: node0/'            conf/cassandra.yaml
+sed -i 's/listen_address:.*$/listen_address: %s/' conf/cassandra.yaml
+sed -i 's/rpc_address:.*$/rpc_address: %s/'       conf/cassandra.yaml
+
+# start DDAC
+echo "Starting DDAC"
+sudo -H -u vagrant bash -c 'bin/cassandra'
+sleep 30
+bin/nodetool status
+
+echo "Vagrant provisioning complete"
+SCRIPT
+
+# Configure VM servers
+puts "Configured for #{NODES} node(s)"
+servers = []
+(0..NODES-1).each do |i|
+  name = 'node' + i.to_s
+  ip = NETWORK + (FIRST_IP + i).to_s
+  servers << {'name' => name, 'ip' => ip}
+end
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "ubuntu/bionic64"
+  servers.each do |server|
+    config.vm.define server['name'] do |config2|
+      config2.vm.hostname = server['name']
+      server_ip = server['ip']
+      config2.vm.network :private_network, ip: server_ip
+      config2.vm.provision :shell, :inline => node_script % [server_ip, server_ip]
+      config2.vm.provider "vmware_fusion" do |v|
+        v.vmx["memsize"]  = CFG_MEMSIZE
+      end
+      config2.vm.provider :virtualbox do |v|
+        v.name = server['name']
+        v.customize ["modifyvm", :id, "--memory", CFG_MEMSIZE]
+        v.customize ["modifyvm", :id, "--cpus"  , "2"   ]
+      end
+    end
+  end
+end

@@ -1,6 +1,6 @@
 # Vagrant Cassandra
 
-This project contains templates for learning how to install and configure [Apache Cassandra](https://cassandra.apache.org/) or [DataStax Enterprise](https://www.datastax.com/products/datastax-enterprise) (DSE) on a local dev machine. It uses [Vagrant](http://www.vagrantup.com/) to configure and run virtual machines (VMs) running in [VirtualBox](https://www.virtualbox.org/). Vagrant enables quickly building environments in a way that is repeatable and isolated from your host system. This makes it perfect for experimenting with different configurations of Cassandra and DSE.
+This project contains templates for learning how to install and configure [Apache Cassandra](https://cassandra.apache.org/)(R) or [DataStax Enterprise](https://www.datastax.com/products/datastax-enterprise) (DSE) on a local dev machine. It uses [Vagrant](http://www.vagrantup.com/) to configure and run virtual machines (VMs) running in [VirtualBox](https://www.virtualbox.org/). Vagrant enables quickly building environments in a way that is repeatable and isolated from your host system. This makes it perfect for experimenting with different configurations of Cassandra and DSE.
 
 Why create yet another Cassandra on Vagrant system? Many scripts and Vagrant projects are already fully assembled and configured. Instead, I like to learn from the ground up so I can better understand each step. In the templates below I've also tried to minimize external dependencies, and the number of tools which need to be installed. (For example, I don't use Chef or Puppet here.)
 
@@ -35,7 +35,7 @@ Here are some quick screencasts which walk through the three different templates
 
 ## Installation
 
-Note: These scripts were created on a Mac OS X 10.9/10.10/10.11 host with Vagrant v1.6/1.7 and VirtualBox v4.3/5.0. Everything should work for Linux or Windows hosts as well, but I have not tested those platforms. Shell scripts which are meant to run on the host (like up-parallel.sh or down.sh) would need to have Windows equivalents created.
+Note: These scripts were created on a Mac OS X 10.13/10.14 host with Vagrant v2.2.x and VirtualBox v4.2/5.2. Everything should work for Linux or Windows hosts as well, but I have not tested those platforms. Shell scripts which are meant to run on the host (like up-parallel.sh or down.sh) would need to have Windows equivalents created.
 
 1. Edit your local Hosts file to include the private network addresses (this makes it much easier to refer to the VMs by hostname):
 
@@ -69,9 +69,9 @@ Note: These scripts were created on a Mac OS X 10.9/10.10/10.11 host with Vagran
 1. Check that both are installed and reachable from a command line:
 
         $ vagrant --version
-        Vagrant 1.7.4
+        Vagrant 2.2.4
         $ VBoxManage --version
-        5.0.8r103449
+        5.2.28r130011
 
 1. Clone this repository
 
@@ -136,13 +136,17 @@ This template focuses on DataStax Enterprise (DSE) and can build a variable numb
 
 This template is structurally the same as 4.DSE, but instead uses the Standalone Installer which first came out with DSE 4.5.
 
+### [6. DDAC](6.DDAC)
+
+This template uses DataStax Distribution of Apache Cassandra (DDAC) to build a variable number of nodes in a cluster.
+
 ## Notes
 
 * Most templates are currently based off the `ubuntu/trusty64` box which is running 64-bit Ubuntu 14.04 LTS. You can change the `vm.box` value if you want to try different guest operating systems.
 
 # License
 
-Copyright 2014-17 Brian Cantoni
+Copyright 2014-19 Brian Cantoni
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
