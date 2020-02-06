@@ -1,4 +1,4 @@
-## 1.Base Template
+# 1.Base Template
 
 This is a base Vagrant template that starts with only Java pre-installed. Follow the instructions below to try a couple different ways of installing Apache Cassandra and DataStax Enterprise.
 
@@ -19,20 +19,20 @@ When the up command is done, login to the VM and confirm that Java is installed:
 ```
 $ vagrant ssh
 vagrant@base:~$ java -version
-openjdk version "1.8.0_171"
-OpenJDK Runtime Environment (build 1.8.0_171-8u171-b11-2~14.04-b11)
-OpenJDK 64-Bit Server VM (build 25.171-b11, mixed mode)
+openjdk version "1.8.0_242"
+OpenJDK Runtime Environment (build 1.8.0_242-8u242-b08-0ubuntu3~16.04-b08)
+OpenJDK 64-Bit Server VM (build 25.242-b08, mixed mode)
 ```
 
 ### Cassandra (Tarball)
 
 First let's try installing Apache Cassandra from the tarball. These steps are patterned after the Cassandra [Getting Started][gs] page.
 
-1. From the [Cassandra project site][dl] find the current 2.x release tarball (as of this writing, it's `apache-cassandra-2.2.14-bin.tar.gz`)
+1. From the [Cassandra project site][dl] find the current 3.0 release tarball download link
 1. Click the link to find a suitable mirror link and copy it
 1. From inside the VM, download and expand:
 
-        $ wget http://apache.mirrors.pair.com/cassandra/2.2.14/apache-cassandra-2.2.14-bin.tar.gz
+        $ wget https://www-us.apache.org/dist/cassandra/3.0.19/apache-cassandra-3.0.19-bin.tar.gz
         $ tar xvzf apache-cassandra-*-bin.tar.gz
         $ cd apache-cassandra-*
 
@@ -41,7 +41,7 @@ First let's try installing Apache Cassandra from the tarball. These steps are pa
         $ bin/cassandra
         $ bin/cqlsh
         Connected to Test Cluster at localhost:9160.
-        [cqlsh 4.1.1 | Cassandra 2.0.8 | CQL spec 3.1.1 | Thrift protocol 19.39.0]
+        [cqlsh 5.0.1 | Cassandra 3.0.19 | CQL spec 3.4.0 | Native protocol v4]
         Use HELP for help.
         cqlsh>
 
@@ -69,7 +69,7 @@ To exercise and play further with Cassandra, go through the [Getting Started][gs
 
     $ cqlsh
     Connected to Test Cluster at localhost:9160.
-    [cqlsh 5.0.1 | Cassandra 2.2.14 | CQL spec 3.3.1 | Native protocol v4]
+    [cqlsh 5.0.1 | Cassandra 3.0.19 | CQL spec 3.4.0 | Native protocol v4]
     Use HELP for help.
     cqlsh> COPY usertest.users (user_id, email, lname, fname) FROM '/vagrant/sample_users.csv' WITH HEADER = true;
     100 rows imported in 0.173 seconds.
@@ -84,8 +84,8 @@ To exercise and play further with Cassandra, go through the [Getting Started][gs
 To clean up from this step, stop Cassandra and remove the data directories:
 
     $ pkill -f CassandraDaemon
-    $ sudo rm -rf /var/lib/cassandra
-    $ sudm rm -rf /var/log/cassandra
+    $ rm -rf data/
+    $ rm -rf logs/
 
 ### DataStax Distribution of Apache Cassandra
 
@@ -116,8 +116,7 @@ Now you can play with Cassandra as we did before, using the CQLSH tool.
 
 See also the example [6.DDAC](../6.DDAC/README.md) which is a full automatic multinode install of DDAC.
 
-
 [gs]: https://cassandra.apache.org/doc/latest/getting_started/index.html
 [dl]: https://cassandra.apache.org/download/
-[ddac]: https://www.datastax.com/products/datastax-distribution-of-apache-cassandra
+[ddac]: https://www.datastax.com/products/apache-cassandra
 [downloads]: https://downloads.datastax.com/#ddac

@@ -1,6 +1,6 @@
-## 4.DDAC Template
+# 4.DDAC Template
 
-This Vagrant template sets up DataStax Distribution of Apache Cassandar (DDAC) on a configurable number of VMs:
+This Vagrant template sets up DataStax Distribution of Apache Cassandra (DDAC) on a configurable number of VMs:
 
 * node[0-n] - DDAC nodes (with prerequisites and DDAC already installed)
 

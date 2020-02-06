@@ -25,17 +25,24 @@ Posts from my blog related to this project:
 Here are some quick screencasts which walk through the three different templates in this project:
 
 ### 1. Base
+
 [![Vagrant Cassandra Single Node Screencast](http://img.youtube.com/vi/tjNLQNYd3Rc/0.jpg)](http://www.youtube.com/watch?v=tjNLQNYd3Rc)
 
 ### 2. MultiNode
+
+Note: This one is obsolete because OpsCenter no longer supports open source Apache Cassandra, but I've left it here to show what OpsCenter used to look like.
+
 [![Vagrant Cassandra Multi Node Screencast](http://img.youtube.com/vi/xaVqvNeNlKM/0.jpg)](http://www.youtube.com/watch?v=xaVqvNeNlKM)
 
 ### 3. MultiDC
+
+Note: This one is obsolete because OpsCenter no longer supports open source Apache Cassandra, but I've left it here to show what OpsCenter used to look like.
+
 [![Vagrant Cassandra Multi Datacenter Screencast](http://img.youtube.com/vi/rTGSfmpgqP0/0.jpg)](http://www.youtube.com/watch?v=rTGSfmpgqP0)
 
 ## Installation
 
-Note: These scripts were created on a Mac OS X 10.13/10.14 host with Vagrant v2.2.x and VirtualBox v4.2/5.2. Everything should work for Linux or Windows hosts as well, but I have not tested those platforms. Shell scripts which are meant to run on the host (like up-parallel.sh or down.sh) would need to have Windows equivalents created.
+Note: These scripts were created on a Mac OS X 10.13/10.14 host with Vagrant v2.2.x and VirtualBox v6.0. Everything should work for Linux or Windows hosts as well, but I have not tested those platforms. Shell scripts which are meant to run on the host (like up-parallel.sh or down.sh) would need to have Windows equivalents created.
 
 1. Edit your local Hosts file to include the private network addresses (this makes it much easier to refer to the VMs by hostname):
 
@@ -69,9 +76,9 @@ Note: These scripts were created on a Mac OS X 10.13/10.14 host with Vagrant v2.
 1. Check that both are installed and reachable from a command line:
 
         $ vagrant --version
-        Vagrant 2.2.4
+        Vagrant 2.2.7
         $ VBoxManage --version
-        5.2.28r130011
+        6.0.16r135674
 
 1. Clone this repository
 
@@ -122,11 +129,11 @@ Same as above, but using CentOS instead of Ubuntu.
 
 ### [2. MultiNode](2.MultiNode)
 
-This template creates 4 VMs: one for OpsCenter and 3 for Cassandra nodes. OpsCenter is preinstalled, and you can use that to finish building the cluster.
+(Obsolete.)
 
 ### [3. MultiDC](3.MultiDC)
 
-This template builds and configures a multi-datacenter cluster (one OpsCenter VM and 6 Cassandra nodes in 2 logical datacenters).
+This template builds and configures a multi-datacenter cluster (6 Cassandra nodes in 2 logical datacenters).
 
 ### [4. DSE](4.DSE)
 
@@ -134,7 +141,7 @@ This template focuses on DataStax Enterprise (DSE) and can build a variable numb
 
 ### [5. Installer](5.Installer)
 
-This template is structurally the same as 4.DSE, but instead uses the Standalone Installer which first came out with DSE 4.5.
+(Obsolete.)
 
 ### [6. DDAC](6.DDAC)
 
@@ -142,11 +149,11 @@ This template uses DataStax Distribution of Apache Cassandra (DDAC) to build a v
 
 ## Notes
 
-* Most templates are currently based off the `ubuntu/trusty64` box which is running 64-bit Ubuntu 14.04 LTS. You can change the `vm.box` value if you want to try different guest operating systems.
+* Most templates are currently based off the `ubuntu/xenial64` box which is running 64-bit Ubuntu 16.04 LTS. You can change the `vm.box` value if you want to try different guest operating systems.
 
-# License
+## License
 
-Copyright 2014-19 Brian Cantoni
+Copyright 2014-20 Brian Cantoni
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

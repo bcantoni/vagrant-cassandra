@@ -1,4 +1,4 @@
-## 4.DSE Template
+# 4.DSE Template
 
 This Vagrant template sets up DataStax Enterprise (DSE) on a configurable number of VMs:
 
@@ -7,19 +7,15 @@ This Vagrant template sets up DataStax Enterprise (DSE) on a configurable number
 Notes:
 
 * Depending on how much memory your host system has, you may need to lower the default memory size for each VM. Currently it's set to 3GB for each VM.
-* This Vagrantfile will install the latest production version of DSE
+* This Vagrantfile will install the latest production version of DSE; you could also provide a specific version if you want (adjust the `dse-full` package version in the `apt-get install` command).
 
 ## Instructions
 
 ### Setup
 
-To use DSE you will need to register at [DataStax](https://www.datastax.com/download). This process will give you a username and password which enable free use of DSE in development environments.
-
-Assuming you already have Vagrant installed, you can bring up the DSE nodes with the following:
+Bring up the DSE nodes with the following:
 
 ```
-$ export VAGRANT_DSE_USERNAME=your-username
-$ export VAGRANT_DSE_PASSWORD=your-password
 $ # optional: adjust DSE_NODES value in Vagrantfile (default 3)
 $ vagrant up
 ```
